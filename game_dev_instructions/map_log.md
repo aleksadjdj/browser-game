@@ -66,3 +66,25 @@ Here’s a structured list:
 | 62 | **Eternal Steppe**      | Grass / Desert     | 27               | Clear          | Windswept plains blending into desert at the horizon.             |
 | 63 | **Hollowspire**         | Dark / Fire        | 31               | Volcanic       | Lava-lit caverns beneath a ruined citadel.                        |
 | 64 | **Frostwind Frontier**  | Snow / Tundra      | -9               | Blizzard       | The edge of the known world, battered by relentless icy winds.    |
+
+
+
+map editor run on 
+http://localhost:3000/editor/map_editor.html
+
+Naming sprites: 
+public\images\maps
+dir map_name
+Bleakspire Glacier >  bleakspire_glacier 
+Serpent’s Veil     >  serpents_veil 
+
+public\images\maps\ashen_peaks
+public\images\maps\ashen_peaks\tile_ashen_peaks_dirt_01.png
+
+
+src\config\maps
+tile config files.
+naming : src\config\maps\map_ashen_peaks.js
+
+src\game\maps - generated map in editor, tile positions 
+src\game\maps\AshenPeaks.json

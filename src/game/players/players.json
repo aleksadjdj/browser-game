@@ -2,8 +2,8 @@
   {
     "id": "player_uuid_1",
     "username": "player 1",
-    "x": 1,
-    "y": 4,
+    "x": 2,
+    "y": 0,
     "fow": 5,
     "hp": 10,
     "movePoints": 10,

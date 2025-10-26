@@ -15,6 +15,7 @@ const mapsDir = path.join(__dirname, "../game/maps");
 
 
 
+
 // 👉 GET /api/player — first player (demo)
 router.get("/", (req, res) => {
   try {
