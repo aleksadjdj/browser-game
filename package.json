@@ -1,0 +1,21 @@
+{
+  "name": "browser_game-main",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "type": "module",
+  "scripts": {
+    "start": "node main.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Aleksandar Djurdjevic",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "mongoose": "^8.19.2",
+    "node-fetch": "^3.3.2",
+    "xml2js": "^0.6.2"
+  }
+}
