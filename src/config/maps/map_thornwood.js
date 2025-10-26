@@ -16,7 +16,7 @@ export const TILES_MAP_THORNWOOD = {
   STONE_01: {
     id: "tile_thornwood_stone_01",
     name: "Thornwood Stone 01",
-    texture: "/images/maps/thornwood/tile_stone_01.png",
+    texture: "/images/maps/thornwood/tile_thornwood_stone_01.png",
     walkable: false,
     walk_points: 0,
   },

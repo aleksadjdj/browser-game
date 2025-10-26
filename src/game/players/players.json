@@ -1,23 +1,22 @@
 [
- {
-   "id": "player_uuid_1",
-   "username": "player 1",
-   "x": 0,
-   "y": 0,
-   "fow": 3,
-   "hp": 10,
-   "movePoints": 10,
-   "currentMap": "AshenPeaks"
+  {
+    "id": "player_uuid_1",
+    "username": "player 1",
+    "x": 1,
+    "y": 4,
+    "fow": 5,
+    "hp": 10,
+    "movePoints": 10,
+    "currentMap": "AshenPeaks"
   },
   {
     "id": "player_uuid_2",
     "username": "player 2",
     "x": 0,
     "y": 0,
-    "fow": 3,
+    "fow": 5,
     "hp": 10,
     "movePoints": 10,
     "currentMap": "AshenPeaks"
   }
-] 
-
+]

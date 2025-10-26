@@ -129,22 +129,46 @@
     }
   });
 
+    
   $('#export').on('click', function() {
     const name = $('#mapName').val();
     const width = parseInt($('#mapWidth').val());
     const height = parseInt($('#mapHeight').val());
+
+    const tileset = TILESETS[selectedTileset];
+    const firstTileId = Object.values(tileset)[0].id; // first tile as default
+
+    const fullMap = [];
+    for (let y = 0; y < height; y++) {
+      for (let x = 0; x < width; x++) {
+        const existing = map.find(t => t.x === x && t.y === y);
+        const tileId = existing ? existing.tile : firstTileId;
+
+        const tileEntry = Object.values(tileset).find(t => t.id === tileId);
+        const tileUrl = tileEntry ? tileEntry.texture : '';
+
+        fullMap.push({
+          x,
+          y,
+          tile: tileId,
+          url: tileUrl
+        });
+      }
+    }
 
     const json = JSON.stringify({
       name,
       tileset: selectedTileset,
       width,
       height,
-      data: map // ✅ flat array with coords
+      data: fullMap
     }, null, 2);
 
     $('#output').val(json);
     downloadJSON(name + '.json', json);
   });
+
+
 
   function downloadJSON(filename, text) {
     const blob = new Blob([text], { type: 'application/json' });

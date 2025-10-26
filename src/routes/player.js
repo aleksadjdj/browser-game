@@ -3,6 +3,8 @@ import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
 
+import { saveJSON, loadJSON } from "../helpers/utils.js";
+
 const router = express.Router();
 
 const __filename = fileURLToPath(import.meta.url);
@@ -11,10 +13,7 @@ const __dirname = path.dirname(__filename);
 const playersPath = path.join(__dirname, "../game/players/players.json");
 const mapsDir = path.join(__dirname, "../game/maps");
 
-// Helper to load JSON files
-function loadJSON(filePath) {
-  return JSON.parse(fs.readFileSync(filePath, "utf-8"));
-}
+
 
 // 👉 GET /api/player — first player (demo)
 router.get("/", (req, res) => {
@@ -50,13 +49,11 @@ router.get("/:id/map", (req, res) => {
     const { x, y, fow } = player;
     const radius = Math.floor(fow / 2);
 
-    // Clamp FOW bounds to map edges
-    const minX = x;
-    const maxX = Math.min(map.width - 1, x + fow - 1);
-    const minY = y;
-    const maxY = Math.min(map.height - 1, y + fow - 1);
+    const minX = Math.max(0, x - radius);
+    const maxX = Math.min(map.width - 1, x + radius);
+    const minY = Math.max(0, y - radius);
+    const maxY = Math.min(map.height - 1, y + radius);
 
-    // Filter visible tiles within bounds
     const visibleTiles = map.data.filter(t =>
       t.x >= minX && t.x <= maxX &&
       t.y >= minY && t.y <= maxY
@@ -76,6 +73,30 @@ router.get("/:id/map", (req, res) => {
     console.error("Error generating map view:", err);
     res.status(500).json({ error: "Failed to generate map view" });
   }
+});
+
+
+// 👉 POST /api/player/:id/move — move player
+router.post("/:id/move", (req, res) => {
+  const { id } = req.params;
+  const { x, y } = req.body;
+
+  // load player from JSON
+  const players = loadJSON(playersPath);
+  const player = players.find(p => p.id === id);
+  if (!player) return res.json({ success: false, message: "Player not found" });
+
+  const dx = Math.abs(player.x - x);
+  const dy = Math.abs(player.y - y);
+  if ((dx === 1 && dy === 0) || (dx === 0 && dy === 1)) {
+    // valid move
+    player.x = x;
+    player.y = y;
+    saveJSON(playersPath, players);
+    return res.json({ success: true });
+  }
+
+  return res.json({ success: false, message: "Invalid move" });
 });
 
 
