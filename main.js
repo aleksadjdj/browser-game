@@ -2,10 +2,12 @@ import express from "express";
 import path from "path";
 import fs from "fs";
 import { fileURLToPath } from "url";
-import { loadAllMaps } from "./map_config_loader.js";
+import { loadAllMaps } from "./map-config-loader.js";
+import playerRoutes from "./src/routes/player.js";
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
+
 
 
 
@@ -14,6 +16,16 @@ app.use(express.static("public"));
 
 // Serve map editor files
 app.use("/editor", express.static("map_editor"));
+
+// route for now
+app.get("/main.html", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "main.html"));
+});
+
+
+// Mount player routes
+app.use("/api/player", playerRoutes);
+
 
 
 

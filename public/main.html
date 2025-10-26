@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Ashen Peaks</title>
+
+  </head>
+  <body>
+    <pre id="output">Loading player...</pre>
+    <canvas id="game" width="512" height="512"></canvas>
+
+    <script type="module">
+      import { Player } from "./js/player.js";
+      const player = new Player();
+      player.loadPlayer();
+      player.loadPlayerMap();
+
+  
+    </script>
+  </body>
+</html>
+
