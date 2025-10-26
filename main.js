@@ -2,8 +2,6 @@ import express from "express";
 import path from "path";
 import fs from "fs";
 import { fileURLToPath } from "url";
-
-
 import { loadAllMaps } from "./map_config_loader.js";
 
 const app = express();
@@ -12,7 +10,7 @@ const PORT = 3000;
 
 
 // Serve public folder (images, css, js)
-app.use(express.static("public"));
+app.use(express.static("public")); 
 
 // Serve map editor files
 app.use("/editor", express.static("map_editor"));

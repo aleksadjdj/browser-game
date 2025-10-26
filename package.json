@@ -6,6 +6,7 @@
   "type": "module",
   "scripts": {
     "start": "node main.js",
+    "dev": "nodemon main.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -17,5 +18,8 @@
     "mongoose": "^8.19.2",
     "node-fetch": "^3.3.2",
     "xml2js": "^0.6.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
   }
 }
