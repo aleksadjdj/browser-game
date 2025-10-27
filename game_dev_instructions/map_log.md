@@ -70,21 +70,11 @@ Here’s a structured list:
 
 
 map editor run on 
-http://localhost:3000/editor/map_editor.html
+http://localhost:3000/editor
 
-Naming sprites: 
-public\images\maps
-dir map_name
-Bleakspire Glacier >  bleakspire_glacier 
-Serpent’s Veil     >  serpents_veil 
+put json inside [text](../src/config/maps)
 
-public\images\maps\ashen_peaks
-public\images\maps\ashen_peaks\tile_ashen_peaks_dirt_01.png
+call in seeds 
+[text](..src/config/seed/seedMaps.js)
 
-
-src\config\maps
-tile config files.
-naming : src\config\maps\map_ashen_peaks.js
-
-src\game\maps - generated map in editor, tile positions 
-src\game\maps\AshenPeaks.json
+that's it...

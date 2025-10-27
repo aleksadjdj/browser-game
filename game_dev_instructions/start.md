@@ -3,5 +3,17 @@ Running dev server
 npm run dev
 
 
-http://localhost:3000/main.html
-http://localhost:3000/editor/map_editor.html
+// DB - seed db
+npm run seed
+
+// DB - drop & seed
+npm run seed:drop
+
+
+// map editor
+http://localhost:3000/editor
+
+
+// game
+http://localhost:3000
+

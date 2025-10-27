@@ -3,30 +3,33 @@
   <head>
     <title>Ashen Peaks</title>
     <style>
+      body {
+        font-family: sans-serif;
+        background: #181818;
+        color: #ddd;
+      }
+      #map {
+        margin: 20px;
+        position: relative;
+      }
+      .tile {
+        transition: border 0.2s, transform 0.2s;
+      }
+      .tile:hover {
+        transform: scale(1.05);
+        cursor: pointer;
+      }
     </style>
   </head>
   <body>
-
-
-    <div id="map" style="position: relative;"></div>
+    <div id="map"></div>
     <pre id="output">Loading player...</pre>
-    <canvas id="game" width="512" height="512"></canvas>
 
-
-    
     <script type="module">
-      // init
       import { Player } from "./js/player.js";
-      const player = new Player("map", 64);
-      player.loadPlayer();
-      player.loadPlayerMap();
-
-
+      const player = new Player("map", 64, "player_uuid_1");
+      await player.loadPlayer();
+      await player.loadPlayerMap();
     </script>
-
-
-
-
   </body>
 </html>
-

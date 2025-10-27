@@ -1,130 +1,137 @@
 export class Player {
+  constructor(mapContainerId = "map", tileSize = 64, playerId = "player_uuid_1") {
+    this.mapContainer = document.getElementById(mapContainerId);
+    this.tileSize = tileSize;
+    this.id = playerId;
 
+    this.player = null; // will store player object from API
+  }
 
-
-    constructor(mapContainerId = "map", tileSize = 64) {
-      this.mapContainer = document.getElementById(mapContainerId);
-      this.tileSize = tileSize;
-
-      this.API_PLAYER_ID = "player_uuid_1";
-    }
-
-
+  // 🧭 Load player data from API
   async loadPlayer() {
     try {
-      const res = await fetch("/api/player");
-      const player = await res.json();
-      document.getElementById("output").textContent = JSON.stringify(player, null, 2);
+      const res = await fetch(`/api/player/${this.id}`);
+      if (!res.ok) throw new Error("Failed to load player.");
+      this.player = await res.json();
+      document.getElementById("output").textContent = JSON.stringify(this.player, null, 2);
     } catch (err) {
+      console.error("❌ Failed to load player:", err);
       document.getElementById("output").textContent = "Failed to load player data.";
-      console.error(err);
-    }
-  }      
-
-  async loadPlayerMap() {
-    const res = await fetch("/api/player/" + this.API_PLAYER_ID + "/map");
-    const data = await res.json();
-    document.getElementById("output").textContent = JSON.stringify(data, null, 2);
-
-    // Store actual player coordinates
-    this.x = data.player.x;
-    this.y = data.player.y;
-
-    // Render the visible tiles
-    this.renderMap(data.visibleTiles);
-
-    // Highlight + raise current player tile
-    const playerTile = Array.from(this.mapContainer.children).find(div => 
-      parseInt(div.dataset.x) === this.x && parseInt(div.dataset.y) === this.y
-    );
-    if (playerTile) {
-      playerTile.style.outline = "2px solid blue";
-      playerTile.style.zIndex = "1"; // 👈 player tile on top
     }
   }
 
-  renderMap(tiles) {
+  // 🗺️ Load visible map area for this player
+  async loadPlayerMap() {
+    try {
+      const res = await fetch(`/api/player/${this.id}/map`);
+      if (!res.ok) throw new Error("Failed to load player map.");
+      const data = await res.json();
+
+      // Save current player coordinates
+      this.x = data.player.x;
+      this.y = data.player.y;
+      this.fow = data.player.fow;
+
+      // Render map tiles
+      this.renderMap(data.visibleTiles, data.player);
+    } catch (err) {
+      console.error("❌ Failed to load player map:", err);
+      document.getElementById("output").textContent = "Failed to load map data.";
+    }
+  }
+
+  // 🎨 Render the visible tiles
+  renderMap(tiles, player) {
     if (!this.mapContainer) return;
 
-    // Clear previous tiles
     this.mapContainer.innerHTML = "";
 
-    // Find min/max x and y to normalize coordinates
+    // Find bounds
     const minX = Math.min(...tiles.map(t => t.x));
     const minY = Math.min(...tiles.map(t => t.y));
     const width = Math.max(...tiles.map(t => t.x)) - minX + 1;
     const height = Math.max(...tiles.map(t => t.y)) - minY + 1;
 
-    this.mapContainer.style.position = "relative";
-    this.mapContainer.style.width = width * this.tileSize + "px";
-    this.mapContainer.style.height = height * this.tileSize + "px";
-    this.mapContainer.style.border = "1px solid #aaa";
+    const tileSize = this.tileSize || 64;
+    const fow = player.fow || 5;
+    const containerSize = fow * tileSize; // width & height
 
-    tiles.forEach(t => {
-      const div = document.createElement("div");
-      div.style.position = "absolute";
-
-      // normalize position relative to top-left of visible area
-      div.style.left = (t.x - minX) * this.tileSize + "px";
-      div.style.top = (t.y - minY) * this.tileSize + "px";
-
-      div.style.width = this.tileSize + "px";
-      div.style.height = this.tileSize + "px";
-      div.style.backgroundImage = `url(${t.url})`;
-      div.style.backgroundSize = "cover";
-      div.style.border = "1px solid rgba(0,0,0,0.1)";
-
-      div.dataset.x = t.x;
-      div.dataset.y = t.y;
-
-      div.addEventListener("click", () => this.onTileClick(div));
-      this.mapContainer.appendChild(div);
+    // Container setup
+    Object.assign(this.mapContainer.style, {
+      position: "relative",
+      width: `${containerSize}px`,
+      height: `${containerSize}px`,
+      border: "1px solid #aaa",
+      backgroundColor: "#000000",
     });
+
+    // Draw tiles
+    for (const t of tiles) {
+      const tileDiv = document.createElement("div");
+      tileDiv.classList.add("tile");
+      tileDiv.dataset.x = t.x;
+      tileDiv.dataset.y = t.y;
+
+      Object.assign(tileDiv.style, {
+        position: "absolute",
+        left: `${(t.x - minX) * this.tileSize}px`,
+        top: `${(t.y - minY) * this.tileSize}px`,
+        width: `${this.tileSize}px`,
+        height: `${this.tileSize}px`,
+        backgroundImage: `url(${t.url})`,
+        backgroundSize: "cover",
+        border: "1px solid rgba(0,0,0,0.1)"
+      });
+
+      // Highlight current player tile
+      if (t.x === player.x && t.y === player.y) {
+        tileDiv.style.outline = "2px solid blue";
+        tileDiv.style.zIndex = "2";
+      }
+
+      // Add click listener
+      tileDiv.addEventListener("click", () => this.onTileClick(tileDiv));
+      this.mapContainer.appendChild(tileDiv);
+    }
   }
 
-
-   onTileClick(tileDiv) {
+  // 🧩 Handle tile click and movement
+  async onTileClick(tileDiv) {
     const tx = parseInt(tileDiv.dataset.x);
     const ty = parseInt(tileDiv.dataset.y);
 
-    // Check if tile is adjacent (4 directions)
     const dx = Math.abs(tx - this.x);
     const dy = Math.abs(ty - this.y);
 
     if ((dx === 1 && dy === 0) || (dx === 0 && dy === 1)) {
-      // Red flash effect
       tileDiv.style.border = "2px solid red";
-      setTimeout(() => {
-        tileDiv.style.border = "1px solid rgba(255,0,0,0.5)";
-      }, 300);
-
-      //if (confirm(`Move player to (${tx}, ${ty})?`)) {
-        this.movePlayer(tx, ty);
-      //}
+      setTimeout(() => (tileDiv.style.border = "1px solid rgba(255,0,0,0.5)"), 300);
+      await this.movePlayer(tx, ty);
     } else {
-      alert("Can only move to adjacent tiles!");
+      alert("You can only move to adjacent tiles!");
     }
   }
 
+  // 🚶 Move player on server and refresh map
   async movePlayer(tx, ty) {
     try {
-      const res = await fetch(`/api/player/${"player_uuid_1"}/move`, {
+      const res = await fetch(`/api/player/${this.id}/move`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ x: tx, y: ty })
       });
 
       const data = await res.json();
+
       if (data.success) {
         this.x = tx;
         this.y = ty;
-        this.loadPlayerMap(); // refresh visible tiles
+        await this.loadPlayerMap(); // refresh view
       } else {
         alert("Move not allowed: " + data.message);
       }
     } catch (err) {
-      console.error("Move request failed:", err);
+      console.error("❌ Move request failed:", err);
     }
   }
-  
 }

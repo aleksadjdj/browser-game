@@ -15,18 +15,14 @@
 </head>
 <body>
 
-<!-- ✅ MAP SETUP STEP -->
+<!-- ✅ MAP SETUP -->
 <div id="setup">
-  <label>Map Name: <input type="text" id="mapName" value="Thornwood"></label>
+  <label>Map Name: <input type="text" id="mapName" readonly></label>
   <label>Width (tiles): <input type="number" id="mapWidth" value="8" min="4" max="100"></label>
   <label>Height (tiles): <input type="number" id="mapHeight" value="8" min="4" max="100"></label>
   <label>Preview Size (px): <input type="number" id="previewSize" value="64" min="4" max="256"></label>
-  <label>Map:
-    <select id="tileset">
-      <option value="thornwood">Thornwood</option>
-      <option value="desert">Desert</option>
-      <option value="frostveil">Frostveil</option>
-    </select>
+  <label>Tileset:
+    <select id="tileset"></select>
   </label>
   <button id="startEditing">Start Editing</button>
 </div>
@@ -43,19 +39,57 @@
 <div id="map"></div>
 
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-
 <script>
-  $(async function() {
-  const TILESETS = await fetch('/api/maps').then(r => r.json());
+$(async function() {
   const baseURL = window.location.origin;
 
-  $('#tileset').empty();
-  for (const key of Object.keys(TILESETS)) {
-    const label = key.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
-    $('#tileset').append(`<option value="${key}">${label}</option>`);
+  // ✅ Load tilesets from DB API
+  const TILESETS = {};
+  try {
+    const tilesets = await fetch('/api/editor').then(r => r.json());
+    for (const ts of tilesets) {
+      TILESETS[ts.name] = {
+        displayName: ts.displayName || ts.name,
+        tiles: {}
+      };
+      for (const tile of ts.tiles) {
+        const key = tile.name.replace(/\s+/g, '_').toUpperCase();
+        TILESETS[ts.name].tiles[key] = {
+          id: tile.id,
+          name: tile.name,
+          texture: tile.texture,
+          walkable: tile.walkable,
+          cost_walk_points: tile.cost_walk_points,
+          liquid: tile.liquid || false
+        };
+      }
+    }
+  } catch (err) {
+    console.error('❌ Failed to load tilesets:', err);
+    alert('Could not load map data from the database.');
+    return;
   }
 
-  let map = []; // ✅ single array of {x, y, tile}
+  // ✅ Populate tileset dropdown with displayName
+  $('#tileset').empty();
+  for (const [name, obj] of Object.entries(TILESETS)) {
+    $('#tileset').append(`<option value="${name}">${obj.displayName}</option>`);
+  }
+
+  // ✅ Auto-fill map name on selection
+  $('#tileset').on('change', function() {
+    const selected = $(this).val();
+    $('#mapName').val(TILESETS[selected].displayName);
+  });
+
+  // ✅ Set initial map name and dropdown correctly
+  const firstTileset = Object.keys(TILESETS)[0];
+  if (firstTileset) {
+    $('#tileset').val(firstTileset);
+    $('#mapName').val(TILESETS[firstTileset].displayName);
+  }
+
+  let map = [];
   let selectedTileset = null;
   let tileSize = 64;
 
@@ -63,10 +97,10 @@
     const width = parseInt($('#mapWidth').val());
     const height = parseInt($('#mapHeight').val());
     tileSize = parseInt($('#previewSize').val());
-    const name = $('#mapName').val();
     selectedTileset = $('#tileset').val();
+    const name = TILESETS[selectedTileset].displayName;
 
-    if (!TILESETS[selectedTileset]) return alert('Invalid tileset');
+    if (!TILESETS[selectedTileset]) return alert('Invalid tileset selected.');
 
     $('#setup').hide();
     $('#toolbar').css('display', 'flex');
@@ -75,9 +109,9 @@
       gridTemplateColumns: `repeat(${width}, ${tileSize}px)`,
       gridTemplateRows: `repeat(${height}, ${tileSize}px)`
     });
-    $('#mapTitle').text(`${name} (${selectedTileset})`);
+    $('#mapTitle').text(`${name} (${TILESETS[selectedTileset].displayName})`);
 
-    const tileset = TILESETS[selectedTileset];
+    const tileset = TILESETS[selectedTileset].tiles;
     $('#blockType').empty();
     for (const [key, val] of Object.entries(tileset)) {
       $('#blockType').append(`<option value="${key}">${val.name}</option>`);
@@ -86,7 +120,7 @@
     $('#tilePreview').css({ width: 128, height: 128 });
     updatePreview();
 
-    // ✅ Create grid of clickable divs
+    // ✅ Create grid
     $('#map').empty();
     for (let y = 0; y < height; y++) {
       for (let x = 0; x < width; x++) {
@@ -100,7 +134,7 @@
   });
 
   function updatePreview() {
-    const tileset = TILESETS[selectedTileset];
+    const tileset = TILESETS[selectedTileset].tiles;
     const type = $('#blockType').val();
     if (tileset && tileset[type]) {
       $('#tilePreview').css('background-image', `url(${baseURL}${tileset[type].texture})`);
@@ -114,51 +148,38 @@
     const x = $(this).data('x');
     const y = $(this).data('y');
     const type = $('#blockType').val();
-    const tileset = TILESETS[selectedTileset];
+    const tileset = TILESETS[selectedTileset].tiles;
     if (!tileset[type]) return;
 
     $(this).css('background-image', `url(${baseURL}${tileset[type].texture})`);
 
     const tileId = tileset[type].id;
     const existing = map.find(t => t.x === x && t.y === y);
-
-    if (existing) {
-      existing.tile = tileId; // update
-    } else {
-      map.push({ x, y, tile: tileId }); // add new
-    }
+    if (existing) existing.tile = tileId;
+    else map.push({ x, y, tile: tileId });
   });
 
-    
   $('#export').on('click', function() {
     const name = $('#mapName').val();
     const width = parseInt($('#mapWidth').val());
     const height = parseInt($('#mapHeight').val());
-
-    const tileset = TILESETS[selectedTileset];
-    const firstTileId = Object.values(tileset)[0].id; // first tile as default
+    const tileset = TILESETS[selectedTileset].tiles;
+    const firstTileId = Object.values(tileset)[0].id;
 
     const fullMap = [];
     for (let y = 0; y < height; y++) {
       for (let x = 0; x < width; x++) {
         const existing = map.find(t => t.x === x && t.y === y);
         const tileId = existing ? existing.tile : firstTileId;
-
         const tileEntry = Object.values(tileset).find(t => t.id === tileId);
         const tileUrl = tileEntry ? tileEntry.texture : '';
-
-        fullMap.push({
-          x,
-          y,
-          tile: tileId,
-          url: tileUrl
-        });
+        fullMap.push({ x, y, tile: tileId, url: tileUrl });
       }
     }
 
     const json = JSON.stringify({
-      name,
-      tileset: selectedTileset,
+      name, // Proper case — "Ashen Peaks" or "Thornwood"
+      mapName: selectedTileset, // lower-case key — "ashen_peaks" or "thornwood"
       width,
       height,
       data: fullMap
@@ -168,8 +189,6 @@
     downloadJSON(name + '.json', json);
   });
 
-
-
   function downloadJSON(filename, text) {
     const blob = new Blob([text], { type: 'application/json' });
     const link = document.createElement('a');
@@ -178,9 +197,6 @@
     link.click();
   }
 });
-
 </script>
-
-
 </body>
 </html>

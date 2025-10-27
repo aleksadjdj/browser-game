@@ -1,6 +1,6 @@
 {
-  "name": "AshenPeaks",
-  "tileset": "ashen_peaks",
+  "name": "Ashen Peaks",
+  "mapName": "ashen_peaks",
   "width": 9,
   "height": 9,
   "data": [
