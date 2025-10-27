@@ -1,19 +1,43 @@
 
-Running dev server
-npm run dev
+
+>npm install
+
+// powerShall as admin 
+> net start MongoDB
+
+// start MongoDB Compass
+
+“*** immediate exit due to unhandled exception***”
+“Access is denied.”
+“System error 1067: The process terminated unexpectedly”
+
+replace path 
+C:\Program Files\MongoDB\Server\8.2\bin\mongod.cfg
+
+dbPath: C:\Program Files\MongoDB\Server\8.2\data\db
+to
+dbPath: D:\MongoDb\data\db
+
+save 
+power shell admin start service 
+>net start MongoDB
+
+
 
 
 // DB - seed db
-npm run seed
+>npm run seed
 
 // DB - drop & seed
-npm run seed:drop
+>npm run seed:drop
+
+Running dev server
+>npm run dev
 
 
+// Browser:
 // map editor
 http://localhost:3000/editor
-
-
 // game
 http://localhost:3000
 
