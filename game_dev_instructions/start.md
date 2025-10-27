@@ -6,14 +6,14 @@
 > net start MongoDB
 
 // start MongoDB Compass
-
+// new connection game or check  in .end MONGO_URI
+***********************************************************
+if error on win
 “*** immediate exit due to unhandled exception***”
 “Access is denied.”
 “System error 1067: The process terminated unexpectedly”
-
 replace path 
 C:\Program Files\MongoDB\Server\8.2\bin\mongod.cfg
-
 dbPath: C:\Program Files\MongoDB\Server\8.2\data\db
 to
 dbPath: D:\MongoDb\data\db
@@ -21,7 +21,7 @@ dbPath: D:\MongoDb\data\db
 save 
 power shell admin start service 
 >net start MongoDB
-
+***********************************************************
 
 
 
