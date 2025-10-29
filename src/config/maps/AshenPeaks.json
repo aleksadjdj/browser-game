@@ -7,62 +7,62 @@
     {
       "x": 0,
       "y": 0,
-      "tile": "tile_ashen_peaks_dirt_01",
-      "url": "/images/maps/ashen_peaks/tile_ashen_peaks_dirt_01.png"
+      "tile": "tile_ashen_peaks_stone_01",
+      "url": "/images/maps/ashen_peaks/tile_ashen_peaks_stone_01.png"
     },
     {
       "x": 1,
       "y": 0,
-      "tile": "tile_ashen_peaks_grass_01",
-      "url": "/images/maps/ashen_peaks/tile_ashen_peaks_grass_01.png"
+      "tile": "tile_ashen_peaks_stone_01",
+      "url": "/images/maps/ashen_peaks/tile_ashen_peaks_stone_01.png"
     },
     {
       "x": 2,
       "y": 0,
-      "tile": "tile_ashen_peaks_grass_01",
-      "url": "/images/maps/ashen_peaks/tile_ashen_peaks_grass_01.png"
+      "tile": "tile_ashen_peaks_stone_01",
+      "url": "/images/maps/ashen_peaks/tile_ashen_peaks_stone_01.png"
     },
     {
       "x": 3,
       "y": 0,
-      "tile": "tile_ashen_peaks_grass_01",
-      "url": "/images/maps/ashen_peaks/tile_ashen_peaks_grass_01.png"
+      "tile": "tile_ashen_peaks_stone_01",
+      "url": "/images/maps/ashen_peaks/tile_ashen_peaks_stone_01.png"
     },
     {
       "x": 4,
       "y": 0,
-      "tile": "tile_ashen_peaks_grass_01",
-      "url": "/images/maps/ashen_peaks/tile_ashen_peaks_grass_01.png"
+      "tile": "tile_ashen_peaks_stone_01",
+      "url": "/images/maps/ashen_peaks/tile_ashen_peaks_stone_01.png"
     },
     {
       "x": 5,
       "y": 0,
-      "tile": "tile_ashen_peaks_grass_01",
-      "url": "/images/maps/ashen_peaks/tile_ashen_peaks_grass_01.png"
+      "tile": "tile_ashen_peaks_stone_01",
+      "url": "/images/maps/ashen_peaks/tile_ashen_peaks_stone_01.png"
     },
     {
       "x": 6,
       "y": 0,
-      "tile": "tile_ashen_peaks_grass_01",
-      "url": "/images/maps/ashen_peaks/tile_ashen_peaks_grass_01.png"
+      "tile": "tile_ashen_peaks_stone_01",
+      "url": "/images/maps/ashen_peaks/tile_ashen_peaks_stone_01.png"
     },
     {
       "x": 7,
       "y": 0,
-      "tile": "tile_ashen_peaks_grass_01",
-      "url": "/images/maps/ashen_peaks/tile_ashen_peaks_grass_01.png"
+      "tile": "tile_ashen_peaks_stone_01",
+      "url": "/images/maps/ashen_peaks/tile_ashen_peaks_stone_01.png"
     },
     {
       "x": 8,
       "y": 0,
-      "tile": "tile_ashen_peaks_grass_01",
-      "url": "/images/maps/ashen_peaks/tile_ashen_peaks_grass_01.png"
+      "tile": "tile_ashen_peaks_stone_01",
+      "url": "/images/maps/ashen_peaks/tile_ashen_peaks_stone_01.png"
     },
     {
       "x": 0,
       "y": 1,
-      "tile": "tile_ashen_peaks_dirt_01",
-      "url": "/images/maps/ashen_peaks/tile_ashen_peaks_dirt_01.png"
+      "tile": "tile_ashen_peaks_stone_01",
+      "url": "/images/maps/ashen_peaks/tile_ashen_peaks_stone_01.png"
     },
     {
       "x": 1,
@@ -109,14 +109,14 @@
     {
       "x": 8,
       "y": 1,
-      "tile": "tile_ashen_peaks_grass_01",
-      "url": "/images/maps/ashen_peaks/tile_ashen_peaks_grass_01.png"
+      "tile": "tile_ashen_peaks_stone_01",
+      "url": "/images/maps/ashen_peaks/tile_ashen_peaks_stone_01.png"
     },
     {
       "x": 0,
       "y": 2,
-      "tile": "tile_ashen_peaks_grass_01",
-      "url": "/images/maps/ashen_peaks/tile_ashen_peaks_grass_01.png"
+      "tile": "tile_ashen_peaks_stone_01",
+      "url": "/images/maps/ashen_peaks/tile_ashen_peaks_stone_01.png"
     },
     {
       "x": 1,
@@ -163,14 +163,14 @@
     {
       "x": 8,
       "y": 2,
-      "tile": "tile_ashen_peaks_grass_01",
-      "url": "/images/maps/ashen_peaks/tile_ashen_peaks_grass_01.png"
+      "tile": "tile_ashen_peaks_stone_01",
+      "url": "/images/maps/ashen_peaks/tile_ashen_peaks_stone_01.png"
     },
     {
       "x": 0,
       "y": 3,
-      "tile": "tile_ashen_peaks_grass_01",
-      "url": "/images/maps/ashen_peaks/tile_ashen_peaks_grass_01.png"
+      "tile": "tile_ashen_peaks_stone_01",
+      "url": "/images/maps/ashen_peaks/tile_ashen_peaks_stone_01.png"
     },
     {
       "x": 1,
@@ -217,14 +217,14 @@
     {
       "x": 8,
       "y": 3,
-      "tile": "tile_ashen_peaks_grass_01",
-      "url": "/images/maps/ashen_peaks/tile_ashen_peaks_grass_01.png"
+      "tile": "tile_ashen_peaks_stone_01",
+      "url": "/images/maps/ashen_peaks/tile_ashen_peaks_stone_01.png"
     },
     {
       "x": 0,
       "y": 4,
-      "tile": "tile_ashen_peaks_grass_01",
-      "url": "/images/maps/ashen_peaks/tile_ashen_peaks_grass_01.png"
+      "tile": "tile_ashen_peaks_stone_01",
+      "url": "/images/maps/ashen_peaks/tile_ashen_peaks_stone_01.png"
     },
     {
       "x": 1,
@@ -271,14 +271,14 @@
     {
       "x": 8,
       "y": 4,
-      "tile": "tile_ashen_peaks_grass_01",
-      "url": "/images/maps/ashen_peaks/tile_ashen_peaks_grass_01.png"
+      "tile": "tile_ashen_peaks_stone_01",
+      "url": "/images/maps/ashen_peaks/tile_ashen_peaks_stone_01.png"
     },
     {
       "x": 0,
       "y": 5,
-      "tile": "tile_ashen_peaks_grass_01",
-      "url": "/images/maps/ashen_peaks/tile_ashen_peaks_grass_01.png"
+      "tile": "tile_ashen_peaks_stone_01",
+      "url": "/images/maps/ashen_peaks/tile_ashen_peaks_stone_01.png"
     },
     {
       "x": 1,
@@ -325,14 +325,14 @@
     {
       "x": 8,
       "y": 5,
-      "tile": "tile_ashen_peaks_grass_01",
-      "url": "/images/maps/ashen_peaks/tile_ashen_peaks_grass_01.png"
+      "tile": "tile_ashen_peaks_stone_01",
+      "url": "/images/maps/ashen_peaks/tile_ashen_peaks_stone_01.png"
     },
     {
       "x": 0,
       "y": 6,
-      "tile": "tile_ashen_peaks_grass_01",
-      "url": "/images/maps/ashen_peaks/tile_ashen_peaks_grass_01.png"
+      "tile": "tile_ashen_peaks_stone_01",
+      "url": "/images/maps/ashen_peaks/tile_ashen_peaks_stone_01.png"
     },
     {
       "x": 1,
@@ -379,14 +379,14 @@
     {
       "x": 8,
       "y": 6,
-      "tile": "tile_ashen_peaks_grass_01",
-      "url": "/images/maps/ashen_peaks/tile_ashen_peaks_grass_01.png"
+      "tile": "tile_ashen_peaks_stone_01",
+      "url": "/images/maps/ashen_peaks/tile_ashen_peaks_stone_01.png"
     },
     {
       "x": 0,
       "y": 7,
-      "tile": "tile_ashen_peaks_grass_01",
-      "url": "/images/maps/ashen_peaks/tile_ashen_peaks_grass_01.png"
+      "tile": "tile_ashen_peaks_stone_01",
+      "url": "/images/maps/ashen_peaks/tile_ashen_peaks_stone_01.png"
     },
     {
       "x": 1,
@@ -433,62 +433,62 @@
     {
       "x": 8,
       "y": 7,
-      "tile": "tile_ashen_peaks_grass_01",
-      "url": "/images/maps/ashen_peaks/tile_ashen_peaks_grass_01.png"
+      "tile": "tile_ashen_peaks_stone_01",
+      "url": "/images/maps/ashen_peaks/tile_ashen_peaks_stone_01.png"
     },
     {
       "x": 0,
       "y": 8,
-      "tile": "tile_ashen_peaks_grass_01",
-      "url": "/images/maps/ashen_peaks/tile_ashen_peaks_grass_01.png"
+      "tile": "tile_ashen_peaks_stone_01",
+      "url": "/images/maps/ashen_peaks/tile_ashen_peaks_stone_01.png"
     },
     {
       "x": 1,
       "y": 8,
-      "tile": "tile_ashen_peaks_grass_01",
-      "url": "/images/maps/ashen_peaks/tile_ashen_peaks_grass_01.png"
+      "tile": "tile_ashen_peaks_stone_01",
+      "url": "/images/maps/ashen_peaks/tile_ashen_peaks_stone_01.png"
     },
     {
       "x": 2,
       "y": 8,
-      "tile": "tile_ashen_peaks_grass_01",
-      "url": "/images/maps/ashen_peaks/tile_ashen_peaks_grass_01.png"
+      "tile": "tile_ashen_peaks_stone_01",
+      "url": "/images/maps/ashen_peaks/tile_ashen_peaks_stone_01.png"
     },
     {
       "x": 3,
       "y": 8,
-      "tile": "tile_ashen_peaks_grass_01",
-      "url": "/images/maps/ashen_peaks/tile_ashen_peaks_grass_01.png"
+      "tile": "tile_ashen_peaks_stone_01",
+      "url": "/images/maps/ashen_peaks/tile_ashen_peaks_stone_01.png"
     },
     {
       "x": 4,
       "y": 8,
-      "tile": "tile_ashen_peaks_grass_01",
-      "url": "/images/maps/ashen_peaks/tile_ashen_peaks_grass_01.png"
+      "tile": "tile_ashen_peaks_stone_01",
+      "url": "/images/maps/ashen_peaks/tile_ashen_peaks_stone_01.png"
     },
     {
       "x": 5,
       "y": 8,
-      "tile": "tile_ashen_peaks_grass_01",
-      "url": "/images/maps/ashen_peaks/tile_ashen_peaks_grass_01.png"
+      "tile": "tile_ashen_peaks_stone_01",
+      "url": "/images/maps/ashen_peaks/tile_ashen_peaks_stone_01.png"
     },
     {
       "x": 6,
       "y": 8,
-      "tile": "tile_ashen_peaks_grass_01",
-      "url": "/images/maps/ashen_peaks/tile_ashen_peaks_grass_01.png"
+      "tile": "tile_ashen_peaks_stone_01",
+      "url": "/images/maps/ashen_peaks/tile_ashen_peaks_stone_01.png"
     },
     {
       "x": 7,
       "y": 8,
-      "tile": "tile_ashen_peaks_dirt_01",
-      "url": "/images/maps/ashen_peaks/tile_ashen_peaks_dirt_01.png"
+      "tile": "tile_ashen_peaks_stone_01",
+      "url": "/images/maps/ashen_peaks/tile_ashen_peaks_stone_01.png"
     },
     {
       "x": 8,
       "y": 8,
-      "tile": "tile_ashen_peaks_dirt_01",
-      "url": "/images/maps/ashen_peaks/tile_ashen_peaks_dirt_01.png"
+      "tile": "tile_ashen_peaks_stone_01",
+      "url": "/images/maps/ashen_peaks/tile_ashen_peaks_stone_01.png"
     }
   ]
 }

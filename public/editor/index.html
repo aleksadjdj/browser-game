@@ -196,6 +196,88 @@ $(async function() {
     link.download = filename;
     link.click();
   }
+
+
+
+  // ✅ Import JSON
+// ✅ Add Import JSON button *after* DOM is ready
+  $(document).ready(() => {
+    const importInput = $('<input type="file" accept=".json" style="display:none">');
+    $('body').append(importInput);
+
+    const importBtn = $('<button id="import">Import JSON</button>');
+    $('#export').before(importBtn);
+
+    importBtn.on('click', () => importInput.click());
+
+    importInput.on('change', async function(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+      try {
+        const text = await file.text();
+        const json = JSON.parse(text);
+        setTimeout(() => loadImportedMap(json), 100);
+      } catch (err) {
+        console.error('❌ Failed to import map:', err);
+        alert('Invalid JSON file or format.');
+      }
+    });
+  });
+  
+function loadImportedMap(json) {
+  const { name, mapName, width, height, data } = json;
+
+  if (!TILESETS[mapName]) {
+    alert(`Tileset "${mapName}" not found in loaded TILESETS.`);
+    return;
+  }
+
+  selectedTileset = mapName;
+  const tileset = TILESETS[selectedTileset].tiles;
+  tileSize = parseInt($('#previewSize').val());
+
+  $('#setup').hide();
+  $('#toolbar').css('display', 'flex');
+  $('#map').empty();
+
+  $('#mapTitle').text(name);
+  $('#mapName').val(name);
+  $('#mapWidth').val(width);
+  $('#mapHeight').val(height);
+
+  $('#blockType').empty();
+  for (const [key, val] of Object.entries(tileset)) {
+    $('#blockType').append(`<option value="${key}">${val.name}</option>`);
+  }
+  updatePreview();
+
+  $('#map').css({
+    display: 'grid',
+    gridTemplateColumns: `repeat(${width}, ${tileSize}px)`,
+    gridTemplateRows: `repeat(${height}, ${tileSize}px)`
+  });
+
+  map = [];
+  for (let y = 0; y < height; y++) {
+    for (let x = 0; x < width; x++) {
+      const tileData = data.find(t => t.x === x && t.y === y);
+      const texture = tileData ? tileData.url : '';
+      const $tile = $('<div class="tile"></div>')
+        .attr('data-x', x)
+        .attr('data-y', y)
+        .css({
+          width: tileSize,
+          height: tileSize,
+          backgroundImage: texture ? `url(${baseURL}${texture})` : 'none'
+        });
+      $('#map').append($tile);
+      if (tileData) map.push({ x, y, tile: tileData.tile });
+    }
+  }
+}
+
+
+
 });
 </script>
 </body>

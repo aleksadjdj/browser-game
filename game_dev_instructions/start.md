@@ -41,3 +41,6 @@ http://localhost:3000/editor
 // game
 http://localhost:3000
 
+// dev to switch player 
+http://localhost:3000/?id=player_uuid_1
+http://localhost:3000/?id=player_uuid_2

@@ -4,7 +4,8 @@ import {
   getPlayersService, 
   getPlayerService,
   getPlayerVisibleMapService,
-  movePlayerService
+  movePlayerService,
+  getNearbyPlayersService 
 } from '../services/playerServices.js';
 
 
@@ -38,8 +39,6 @@ export async function getPlayer(req, res) {
 }
 
 
-
-
 export async function getPlayers(req, res) {
   try {
     const players = await getPlayersService();
@@ -67,8 +66,6 @@ export async function getPlayerMap(req, res) {
 }
 
 
-
-
 export async function movePlayer(req, res) {
   try {
     const { id } = req.params;
@@ -79,5 +76,23 @@ export async function movePlayer(req, res) {
   } catch (err) {
     console.error('❌ Error moving player:', err);
     res.status(500).json({ success: false, message: 'Server error' });
+  }
+}
+
+
+
+export async function getNearbyPlayers(req, res) {
+  try {
+    const { id } = req.params;
+    const result = await getNearbyPlayersService(id);
+
+    if (!result.success) {
+      return res.status(result.status || 404).json(result);
+    }
+
+    res.json(result.data);
+  } catch (err) {
+    console.error("❌ Failed to get nearby players:", err);
+    res.status(500).json({ success: false, message: "Server error" });
   }
 }

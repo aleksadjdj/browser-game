@@ -1,0 +1,30 @@
+    body {
+        font-family: sans-serif;
+        background: #181818;
+        color: #ddd;
+      }
+      #map {
+        margin: 20px;
+        position: relative;
+      }
+      .tile {
+        transition: border 0.2s, transform 0.2s;
+      }
+      .tile:hover {
+        transform: scale(1.05);
+        cursor: pointer;
+      }
+      .other-player {
+        transition: all 0.3s ease;
+        box-shadow: 0 0 3px rgba(255, 0, 0, 0.8);
+      }
+      #log {
+        margin-left: 20px;
+        height: 100px;
+        width: 500px;
+        max-height:150px; 
+        overflow-y:auto; 
+        border:1px solid #ccc; 
+        padding:5px; 
+        font-family:monospace;
+      }

@@ -9,22 +9,35 @@ const players = [
 	{
 		id: 'player_uuid_1',
 		username: 'Player 1',
-		x: 0,
-		y: 0,
-		fow: 5,
-		hp: 10,
-		movePoints: 10,
-		currentMap: 'ashen_peaks'
-	},
-	{
-		id: 'player_uuid_2',
-		username: 'Player 2',
 		x: 1,
 		y: 1,
 		fow: 5,
 		hp: 10,
 		movePoints: 10,
-		currentMap: 'ashen_peaks'
+		currentMap: 'ashen_peaks',
+		lastActive: Date.now(),
+	},
+	{
+		id: 'player_uuid_2',
+		username: 'Player 2',
+		x: 2,
+		y: 2,
+		fow: 5,
+		hp: 10,
+		movePoints: 10,
+		currentMap: 'ashen_peaks',
+		lastActive: Date.now(),
+	},
+	{
+		id: 'player_uuid_3',
+		username: 'Player 3',
+		x: 3,
+		y: 3,
+		fow: 5,
+		hp: 10,
+		movePoints: 10,
+		currentMap: 'ashen_peaks',
+		lastActive: Date.now(),
 	}
 ];
 

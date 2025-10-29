@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Browser Game</title>
+    <link rel="stylesheet" href="/game/css/styles.css" />
+  </head>
+  <body>
+    <div id="map"></div>
+    <div id="log" ></div>
+    <pre id="output">Loading player...</pre>
+
+    <script type="module">
+      import { Player } from "/game/js/player.js";
+
+      // ✅ read from URL or default to player_uuid_1
+      const params = new URLSearchParams(window.location.search);
+      const playerId = params.get("id") || "player_uuid_1";
+      const player = new Player("map", 64, playerId);
+      await player.loadPlayer();
+      await player.loadPlayerMap();
+
+      // 🔁 Auto-refresh every 5 seconds
+      setInterval(async () => {
+        try {
+          await player.loadPlayerMap();
+          console.log("🔄 Player map updated.");
+        } catch (err) {
+          console.error("❌ Failed to update player map:", err);
+        }
+      }, 1000);
+
+    </script>
+  </body>
+</html>

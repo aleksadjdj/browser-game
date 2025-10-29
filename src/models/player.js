@@ -12,6 +12,10 @@ const playerSchema = new Schema({
     required: true,
     trim: true
   },
+  lastActive: { 
+    type: Date, 
+    default: Date.now 
+  },
   x: {
     type: Number,
     required: true,

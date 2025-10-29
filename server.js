@@ -35,7 +35,7 @@ app.get("/editor", (req, res) => {
 
 // ✅ Serve main.html by default when visiting /
 app.get("/", (req, res) => {
-  res.sendFile(path.join(process.cwd(), "public", "main.html"));
+  res.sendFile(path.join(process.cwd(), "public", "game", "index.html"));
 });
 
 
