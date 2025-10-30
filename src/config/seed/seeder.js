@@ -19,7 +19,7 @@ async function dropDatabase() {
   console.log('🧹 Database dropped.');
 }
 
-async function runSeeder() {
+async function seedData() {
   try {
     await connectDB();
 
@@ -42,4 +42,5 @@ async function runSeeder() {
   }
 }
 
-runSeeder();
+seedData();
+

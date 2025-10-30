@@ -2,14 +2,11 @@ import express from "express";
 import path from "path";
 import dotenv from 'dotenv';
 
-
 import connectDB from "./src/config/db/db.js";
-// ✅ import route
 import playerRoutes from "./src/routes/playerRoutes.js";
 import mapEditorRoutes from "./src/routes/mapEditorRoutes.js";
 
 dotenv.config();
-
 
 const PORT = process.env.PORT || 3000;
 const app = express();
@@ -20,6 +17,7 @@ await connectDB();
 
 // Serve public folder (images, css, js)
 app.use(express.static("public")); 
+
 
 
 // ✅ Mount routes
@@ -39,8 +37,12 @@ app.get("/", (req, res) => {
 });
 
 
+
 // ✅ Start server
 app.listen(PORT, () => {
   console.log(`✅ Server running at http://localhost:${PORT}`);
+  console.log(`🎮 Player 1 available at http://localhost:${PORT}/?id=player_uuid_1`);
+  console.log(`🎮 Player 2 available at http://localhost:${PORT}/?id=player_uuid_2`);
+  console.log(`🎮 Game available at http://localhost:${PORT}/?id=player_uuid_1`);
   console.log(`🧩 Editor available at: http://localhost:${PORT}/editor`);
 });
