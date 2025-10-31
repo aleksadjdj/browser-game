@@ -1,6 +1,7 @@
 import Player from '../models/player.js';
 import Map from '../models/map.js';
-import Tileset from "../models/tileset.js";
+import Tileset from '../models/tileset.js';
+import Entity  from '../models/baseEntity.js'; 
 
 
 export async function createPlayerService(data) {
@@ -47,16 +48,16 @@ export async function getPlayerVisibleMapService(id) {
   console.log(`📦 Player currentMap: ${player.currentMap}`);
 
   // 2️⃣ Find the map by tileset (matches player's currentMap)
-  const map = await Map.findOne({ mapName: player.currentMap });
+  const map = await Map.findOne({ slug: player.currentMap });
   if (!map) {
     console.warn(`⚠️ Map not found for tileset: ${player.currentMap}`);
     console.log('🧾 Existing maps in DB:');
-    const maps = await Map.find({}, 'name tileset');
-    console.table(maps.map(m => ({ name: m.name, mapName: m.mapName })));
+    const maps = await Map.find({}, 'slug displayName data');
+    console.table(maps.map(m => ({ mapSlug: m.slug, displayName: m.displayName, data: m.data })));
     return { success: false, status: 404, message: 'Map not found' };
   }
 
-  console.log(`🗺️ Map loaded: ${map.name} (mapName: ${map.mapName})`);
+  console.log(`🗺️ Map loaded: ${map.slug} (mapName: ${map.displayName})`);
   console.log(`📏 Map size: ${map.width}x${map.height}`);
   console.log(`🧩 Total tiles: ${map.data?.length || 0}`);
 
@@ -82,8 +83,8 @@ export async function getPlayerVisibleMapService(id) {
 
   // 5️⃣ Build the cropped response
   const croppedMap = {
-    name: map.name,
-    mapName: map.mapName,
+    mapSLug: map.slug,
+    displayName: map.displayName,
     width: map.width,
     height: map.height,
     player: { id, x, y, fow },
@@ -134,10 +135,10 @@ export async function movePlayerService(id, x, y) {
   }
 
   // ✅ Load map and tileset by player's currentMap
-  const map = await Map.findOne({ mapName: player.currentMap });
+  const map = await Map.findOne({ slug: player.currentMap });
   if (!map) return { success: false, message: "Map not found" };
 
-  const tileset = await Tileset.findOne({ name: player.currentMap });
+  const tileset = await Tileset.findOne({ mapSlug: player.currentMap });
   if (!tileset) return { success: false, message: "Tileset not found" };
 
   // ✅ Find tile at destination
@@ -145,7 +146,7 @@ export async function movePlayerService(id, x, y) {
   if (!tileData) return { success: false, message: "No tile at target position" };
 
   // ✅ Match with tile definition from tileset
-  const tileType = tileset.tiles.find(t => t.id === tileData.tile);
+  const tileType = tileset.tiles.find(t => t.slug === tileData.tileSlug);
   if (!tileType) return { success: false, message: "Tile type not found in tileset" };
 
   // ✅ Check if walkable
@@ -205,5 +206,45 @@ export async function getNearbyPlayersService(id) {
       player: { id, x, y, fow, currentMap, lastActive: player.lastActive },
       nearbyPlayers,
     },
+  };
+}
+
+
+
+
+
+export async function getNearbyEntitiesService(playerId) {
+  // 1️⃣ Find the main player
+  const player = await Player.findOne({ id: playerId });
+  if (!player) {
+    return { success: false, status: 404, message: "Player not found" };
+  }
+
+  // 🕒 Update lastActive each time player pings
+  player.lastActive = Date.now();
+  await player.save();
+
+  const currentMap = (player.currentMap || "").toLowerCase();
+  const { x, y, fow = 5 } = player;
+  const radius = Math.floor(fow / 2);
+
+  const minX = x - radius;
+  const maxX = x + radius;
+  const minY = y - radius;
+  const maxY = y + radius;
+
+  // 2️⃣ Find nearby entities on the same map and within range
+  const nearbyEntities = await Entity.find({
+    mapSlug: new RegExp(`^${currentMap}$`, "i"),
+    x: { $gte: minX, $lte: maxX },
+    y: { $gte: minY, $lte: maxY }
+  }).select('slug displayName type x y texture');
+
+  return {
+    success: true,
+    data: {
+      player: { id: player.id, x, y, fow, currentMap, lastActive: player.lastActive },
+      nearbyEntities
+    }
   };
 }

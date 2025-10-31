@@ -1,8 +1,9 @@
 // src/models/map.js
 import mongoose from 'mongoose';
+import { Entity } from './baseEntity.js';
 
 // Extend with new fields
-const entityPortal = new mongoose.Schema({
+const entityPortalSchema  = new mongoose.Schema({
   slug: {
     type: String,
     required: true,
@@ -12,17 +13,9 @@ const entityPortal = new mongoose.Schema({
     type: String,
     required: true
   },
-	type: {
-    type: String,
-    required: true
-  },
   texture: {
     type: String,
     required: true
-  },
-  interactable: { 
-    type: Boolean, 
-    default: true 
   },
   x: { 
     type: Number, 
@@ -34,10 +27,10 @@ const entityPortal = new mongoose.Schema({
     required: true,
     default: 0
   },
-	destMapName: { 
+	destMapSlug: { 
 		type: String, 
 		required: true,
-		default: 'thornwood' 
+		default: 'ashen_peaks' 
 	},
   destX: { 
     type: Number, 
@@ -48,7 +41,8 @@ const entityPortal = new mongoose.Schema({
     type: Number, 
     required: true,
     default: 1
-  },
+  }
+
 });
 
-export default mongoose.model('EntityPortal', entityPortal);
+export const EntityPortal = Entity.discriminator('EntityPortal', entityPortalSchema );

@@ -50,6 +50,7 @@ export class Player {
       this.fow = data.player.fow;
       this.renderMap(data.visibleTiles, data.player);
       await this.loadNearbyPlayers();
+      await this.loadNearbyEntities();
       // this.log("🗺️ Map loaded.");
     } catch (err) {
       console.error("❌ Failed to load player map:", err);
@@ -117,6 +118,91 @@ export class Player {
     }
   }
 
+  async loadNearbyEntities() {
+    try {
+      const res = await fetch(`/api/player/${this.id}/nearby-entities`);
+      if (!res.ok) throw new Error("Failed to load nearby entities.");
+      const json = await res.json();
+
+      // Extract the array of entities
+      const entities = json.data?.nearbyEntities || [];
+      await this.renderNearbyEntities(entities);
+    } catch (err) {
+      console.error("❌ Failed to load nearby entities:", err);
+      this.log("❌ Failed to load nearby entities.");
+    }
+  }
+
+
+
+  
+async renderNearbyEntities(entities = []) {
+  if (!this.mapContainer) {
+    console.warn("Map container not found!");
+    return;
+  }
+
+  console.log("renderNearbyEntities called with:", entities);
+
+  // Remove old entity markers
+  this.mapContainer.querySelectorAll(".entity").forEach(el => el.remove());
+
+  for (const entity of entities) {
+    console.log("Processing entity:", entity);
+
+    if (entity.x == null || entity.y == null) {
+      console.warn("Skipping entity without coordinates:", entity);
+      continue;
+    }
+
+    const tileEl = this.mapContainer.querySelector(
+      `.tile[data-x="${entity.x}"][data-y="${entity.y}"]`
+    );
+
+    if (!tileEl) {
+      console.warn("Tile element not found for entity:", entity);
+      continue;
+    }
+
+    const marker = document.createElement("div");
+    marker.classList.add("entity");
+    Object.assign(marker.style, {
+      position: "absolute",
+      left: tileEl.style.left,
+      top: tileEl.style.top,
+      width: tileEl.style.width,
+      height: tileEl.style.height,
+      backgroundImage: `url(${entity.texture || ""})`,
+      backgroundSize: "cover",
+      zIndex: 2,
+      pointerEvents: "none"
+    });
+
+    // Optional: label above entity
+    const label = document.createElement("div");
+    label.textContent = entity.displayName || "Unknown";
+    Object.assign(label.style, {
+      position: "absolute",
+      left: "50%",
+      bottom: "100%",
+      transform: "translateX(-50%) translateY(-8px)",
+      fontSize: "12px",
+      color: "yellow",
+      textShadow: "0 0 2px black",
+      whiteSpace: "nowrap",
+      pointerEvents: "none",
+      zIndex: 3
+    });
+
+    marker.appendChild(label);
+    this.mapContainer.appendChild(marker);
+  }
+
+  console.log(`🟢 Rendered ${entities.length} nearby entities`);
+  this.log(`🟢 Nearby entities: ${entities.length}`);
+}
+
+
 
   renderMap(tiles, player) {
     if (!this.mapContainer) return;
@@ -146,7 +232,7 @@ export class Player {
         top: `${(t.y - minY) * this.tileSize}px`,
         width: `${this.tileSize}px`,
         height: `${this.tileSize}px`,
-        backgroundImage: `url(${t.url})`,
+        backgroundImage: `url(${t.textureUrl})`,
         backgroundSize: "cover",
         border: "1px solid rgba(0,0,0,0.1)"
       });
@@ -193,4 +279,11 @@ export class Player {
       console.error("❌ Move request failed:", err);
     }
   }
+
+
+
+
 }
+
+
+

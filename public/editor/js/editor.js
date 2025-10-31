@@ -74,18 +74,29 @@ $(async function() {
   }
 
   // ✏️ Place tile
-  $('#map').on('click', '.tile', function() {
-    const x = +$(this).data('x');
-    const y = +$(this).data('y');
-    const selectedSlug = $('#blockType').val();
-    const tile = TILESET.find(t => t.slug === selectedSlug);
-    if (!tile) return;
+$('#map').on('click', '.tile', function() {
+  const x = +$(this).data('x');
+  const y = +$(this).data('y');
+  const selectedSlug = $('#blockType').val();
+  const tile = TILESET.find(t => t.slug === selectedSlug);
+  if (!tile) return;
 
-    $(this).css('background-image', `url(${baseURL}${tile.textureUrl})`);
-    const existing = mapData.find(t => t.x === x && t.y === y);
-    if (existing) existing.tile = tile.slug;
-    else mapData.push({ x, y, tileSlug: tile.slug, textureUrl: tile.textureUrl });
-  });
+  // Update the tile’s visual
+  $(this).css('background-image', `url(${baseURL}${tile.textureUrl})`);
+
+  // Update or add to map data
+  const existing = mapData.find(t => t.x === x && t.y === y);
+  if (existing) {
+    existing.tileSlug = tile.slug;
+    existing.textureUrl = tile.textureUrl;
+  } else {
+    mapData.push({
+      x, y,
+      tileSlug: tile.slug,
+      textureUrl: tile.textureUrl
+    });
+  }
+});
 
   // 💾 Export
   $('#export').on('click', () => {

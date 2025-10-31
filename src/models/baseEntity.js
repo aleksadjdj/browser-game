@@ -1,28 +1,29 @@
+//src\models\baseEntity.js
 import mongoose from 'mongoose';
 
 const entitySchema = new mongoose.Schema({
-  id: {
+  slug: {
     type: String,
     required: true,
     unique: true
   },
-  name: {
+  displayName: {
     type: String,
     required: true
   },
-	type: {
+  mapSlug: {
+    type: String,
+    required: true
+  },
+  type: {
     type: String,
     required: true
   },
   texture: {
     type: String,
     required: true
-  },
-  properties: {
-    type: Map,
-    of: mongoose.Schema.Types.Mixed,
-    default: {}
   }
 });
 
-export default mongoose.model('Entity', entitySchema);
+const Entity = mongoose.model('Entity', entitySchema);
+export default Entity;

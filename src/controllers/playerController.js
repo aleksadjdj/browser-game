@@ -5,7 +5,8 @@ import {
   getPlayerService,
   getPlayerVisibleMapService,
   movePlayerService,
-  getNearbyPlayersService 
+  getNearbyPlayersService,
+  getNearbyEntitiesService,
 } from '../services/playerServices.js';
 
 
@@ -93,6 +94,30 @@ export async function getNearbyPlayers(req, res) {
     res.json(result.data);
   } catch (err) {
     console.error("❌ Failed to get nearby players:", err);
+    res.status(500).json({ success: false, message: "Server error" });
+  }
+}
+
+
+export async function getNearbyEntities(req, res) {
+  const { id } = req.params;
+
+  if (!id) {
+    return res.status(400).json({ success: false, message: "Player ID is required" });
+  }
+
+  try {
+    const result = await getNearbyEntitiesService(id);
+
+    if (!result.success) {
+      // Use the status from service or fallback to 404
+      return res.status(result.status || 404).json({ success: false, message: result.message });
+    }
+
+    // Return data with success flag
+    res.status(200).json({ success: true, data: result.data });
+  } catch (err) {
+    console.error("❌ Failed to get nearby entities:", err);
     res.status(500).json({ success: false, message: "Server error" });
   }
 }

@@ -6,7 +6,8 @@ import {
   getPlayer,
   getPlayerMap,
   movePlayer,
-  getNearbyPlayers
+  getNearbyPlayers,
+  getNearbyEntities,
 } from '../controllers/playerController.js';
 
 const router = Router();
@@ -18,7 +19,8 @@ router.get('/', getPlayers);
 router.get('/:id', getPlayer);
 router.post('/:id/move', movePlayer);
 router.get('/:id/map', getPlayerMap);
-router.get('/:id/nearby', getNearbyPlayers); // ✅ FIXED
+router.get('/:id/nearby', getNearbyPlayers); 
+router.get('/:id/nearby-entities', getNearbyEntities);
 
 
 export default router;
