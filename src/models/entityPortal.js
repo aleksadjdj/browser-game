@@ -1,6 +1,6 @@
 // src/models/map.js
 import mongoose from 'mongoose';
-import { Entity } from './baseEntity.js';
+import  Entity  from './baseEntity.js';
 
 // Extend with new fields
 const entityPortalSchema  = new mongoose.Schema({
