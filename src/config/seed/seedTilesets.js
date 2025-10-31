@@ -9,12 +9,12 @@ dotenv.config();
 
 const tilesets = [
   { 
-    name: 'ashen_peaks', 
+    mapSlug: 'ashen_peaks', 
     displayName: 'Ashen Peaks',
     data: CONFIG_TILES_ASHEN_PEAKS 
   },
   { 
-    name: 'thornwood', 
+    mapSlug: 'thornwood', 
     displayName: 'Thornwood',
     data: CONFIG_TILES_THORNWOOD 
   }
@@ -28,18 +28,18 @@ export default async function seedTilesets() {
     await mongoose.connect(process.env.MONGO_URI);
     console.log('✅ MongoDB connected.');
 
-    for (const { name, displayName, data } of tilesets) {
+    for (const { mapSlug, displayName, data } of tilesets) {
       const tiles = Object.values(data); // convert object → array
 
       // 🧹 Remove duplicates if already exists
-      const existing = await Tileset.findOne({ name });
+      const existing = await Tileset.findOne({ mapSlug });
       if (existing) {
-        console.log(`⚠️ Tileset "${name}" already exists, skipping...`);
+        console.log(`⚠️ Tileset "${mapSlug}" already exists, skipping...`);
         continue;
       }
 
-      await Tileset.create({ name, displayName,  tiles });
-      console.log(`✅ Inserted tileset: ${name} (${tiles.length} tiles)`);
+      await Tileset.create({ mapSlug, displayName,  tiles });
+      console.log(`✅ Inserted tileset: ${mapSlug} (${tiles.length} tiles)`);
     }
 
     console.log('🎉 Tileset seeding complete!');

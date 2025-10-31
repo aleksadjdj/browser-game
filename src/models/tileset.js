@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 
 const tilesetSchema = new mongoose.Schema({
-  name: {
+  mapSlug: {
     // ashen_peaks, thornwood, winters_veil, ...etc.
     type: String,
     required: true,
@@ -14,11 +14,11 @@ const tilesetSchema = new mongoose.Schema({
   },
   tiles: [
     {
-      id: String,
-      name: String,
-      texture: String,
+      slug: String,
+      displayName: String,
+      textureUrl: String,
       walkable: Boolean,
-      cost_walk_points: Number,
+      costWalkPoints: Number,
       liquid: Boolean
     }
   ]

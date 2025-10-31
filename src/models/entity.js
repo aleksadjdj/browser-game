@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const tileSchema = new mongoose.Schema({
+const entitySchema = new mongoose.Schema({
   id: {
     type: String,
     required: true,
@@ -18,19 +18,11 @@ const tileSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  x: {
-    type: Number,
-    required: true
-  },
-  y: {
-    type: Number,
-    required: true
-  },
-	interactable: {
-		type: Boolean,
-		required: true,
-		default: true
-	}
+  properties: {
+    type: Map,
+    of: mongoose.Schema.Types.Mixed,
+    default: {}
+  }
 });
 
-export default mongoose.model('Entity', tileSchema);
+export default mongoose.model('Entity', entitySchema);

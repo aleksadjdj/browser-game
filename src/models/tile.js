@@ -1,16 +1,16 @@
 import mongoose from 'mongoose';
 
 const tileSchema = new mongoose.Schema({
-  id: {
+  slug: {
     type: String,
     required: true,
     unique: true
   },
-  name: {
+  displayName: {
     type: String,
     required: true
   },
-  texture: {
+  textureUrl: {
     type: String,
     required: true
   },
@@ -19,7 +19,7 @@ const tileSchema = new mongoose.Schema({
     required: true,
     default: true
   },
-  cost_walk_points: {
+  costWalkPoints: {
     type: Number,
     required: true,
     default: 1

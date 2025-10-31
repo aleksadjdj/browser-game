@@ -1,6 +1,7 @@
 // src/config/seed/seeder.js
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
+import seedMapNames from './seedMapNames.js';
 import seedMaps from './seedMaps.js';
 import seedPlayers from './seedPlayers.js';
 import seedTilesets from './seedTilesets.js';
@@ -29,6 +30,8 @@ async function seedData() {
     }
 
     console.log('🌱 Seeding data...');
+
+    await seedMapNames();
     await seedPlayers();
     await seedTilesets();
     await seedMaps();

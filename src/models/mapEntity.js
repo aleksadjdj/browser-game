@@ -14,7 +14,7 @@ const mapEntitySchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  texture: {
+  textureUrl: {
     type: String,
     required: true
   },

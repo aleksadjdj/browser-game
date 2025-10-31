@@ -1,7 +1,7 @@
 export const STATIC_ENTITIES_PORTALS = {
   PORTAL_01: {
-    id: "static_entity_portal_01",
-    name: "Portal 01",
+    slug: "static_entity_portal_01",
+    displayName: "Portal 01",
     type: "portal",
     texture: "/images/entities/static/portals/static_entity_portal_01.gif",
     x: 0, 

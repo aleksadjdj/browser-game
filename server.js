@@ -10,7 +10,9 @@ dotenv.config();
 
 const PORT = process.env.PORT || 3000;
 const app = express();
-app.use(express.json()); // ✅ Parse JSON body
+
+// ✅ Parse JSON body
+app.use(express.json()); 
 
 // Connect to DB
 await connectDB();
@@ -21,8 +23,8 @@ app.use(express.static("public"));
 
 
 // ✅ Mount routes
-app.use('/api/player', playerRoutes);
 app.use('/api/editor', mapEditorRoutes);
+app.use('/api/player', playerRoutes);
 
 
 
@@ -43,6 +45,7 @@ app.listen(PORT, () => {
   console.log(`✅ Server running at http://localhost:${PORT}`);
   console.log(`🎮 Player 1 available at http://localhost:${PORT}/?id=player_uuid_1`);
   console.log(`🎮 Player 2 available at http://localhost:${PORT}/?id=player_uuid_2`);
-  console.log(`🎮 Game available at http://localhost:${PORT}/?id=player_uuid_1`);
+  console.log(`🎮 Player 3 available at http://localhost:${PORT}/?id=player_uuid_3`);
+  console.log(`🎮 Game available at (player 1) http://localhost:${PORT}`);
   console.log(`🧩 Editor available at: http://localhost:${PORT}/editor`);
 });

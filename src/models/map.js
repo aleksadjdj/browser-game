@@ -11,11 +11,11 @@ const tileSchema = new Schema({
     type: Number,
     required: true
   },
-  tile: {
+  tileSlug: {
     type: String,
     required: true
   },
-  url: {
+  textureUrl: {
     type: String,
     required: true
   }
@@ -23,16 +23,17 @@ const tileSchema = new Schema({
 
 // Define the main map schema
 const mapSchema = new Schema({
-  name: {
+  slug: {
+    // Internal slug - ashen_peaks, thornwood, winters_veil, ...etc.
+    type: String,
+    required: true,
+    unique: true
+  },
+  displayName: {
     // Display name Ashen Peaks, Thornwood, Winter’s Veil, ...etc.
     type: String,
     required: true,
     trim: true
-  },
-  mapName: {
-    // Internal slug - ashen_peaks, thornwood, winters_veil, ...etc.
-    type: String,
-    required: true
   },
   width: {
     type: Number,

@@ -1,284 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Map Editor</title>
-<style>
-  body { font-family: sans-serif; display: flex; flex-direction: column; align-items: flex-start; gap: 20px; margin: 20px; }
-  #setup { display: flex; flex-direction: column; gap: 10px; }
-  #toolbar { display: none; flex-direction: column; gap: 10px; }
-  #map { display: grid; border: 1px solid #aaa; margin-top: 10px; }
-  .tile { border: 1px solid #ddd; background-size: cover; }
-  #tilePreview { border: 2px solid #000; background-size: cover; }
-  textarea { width: 300px; }
-</style>
+  <meta charset="UTF-8">
+  <title>Map Editor</title>
+  <link rel="stylesheet" href="css/editor.css">
 </head>
 <body>
 
-<!-- ✅ MAP SETUP -->
+<!-- 🧭 MAP SETUP -->
 <div id="setup">
-  <label>Map Name: <input type="text" id="mapName" readonly></label>
-  <label>Width (tiles): <input type="number" id="mapWidth" value="8" min="4" max="100"></label>
-  <label>Height (tiles): <input type="number" id="mapHeight" value="8" min="4" max="100"></label>
-  <label>Preview Size (px): <input type="number" id="previewSize" value="64" min="4" max="256"></label>
-  <label>Tileset:
-    <select id="tileset"></select>
+  <h2>Map Setup</h2>
+  <label>Map:
+    <select id="mapSelect"></select>
   </label>
-  <button id="startEditing">Start Editing</button>
+  <label>Width: <input type="number" id="mapWidth" value="8" min="4" max="200"></label>
+  <label>Height: <input type="number" id="mapHeight" value="8" min="4" max="200"></label>
+  <label>Tile Size (px): <input type="number" id="tileSize" value="64" min="16" max="256"></label>
+  <button id="start">Start Editing</button>
 </div>
 
-<!-- ✅ TOOLBAR & MAP -->
+<!-- 🧰 TOOLBAR -->
 <div id="toolbar">
-  <h3 id="mapTitle"></h3>
-  <select id="blockType"></select>
+  <h2 id="mapTitle"></h2>
+  <label>Block Type: <select id="blockType"></select></label>
   <div id="tilePreview"></div>
-  <button id="export">Export JSON</button>
-  <textarea id="output" rows="10" cols="20" readonly></textarea>
+  <div>
+    <button id="export">Export JSON</button>
+    <button id="import">Import JSON</button>
+  </div>
+  <textarea id="output" readonly></textarea>
 </div>
 
 <div id="map"></div>
 
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-<script>
-$(async function() {
-  const baseURL = window.location.origin;
-
-  // ✅ Load tilesets from DB API
-  const TILESETS = {};
-  try {
-    const tilesets = await fetch('/api/editor').then(r => r.json());
-    for (const ts of tilesets) {
-      TILESETS[ts.name] = {
-        displayName: ts.displayName || ts.name,
-        tiles: {}
-      };
-      for (const tile of ts.tiles) {
-        const key = tile.name.replace(/\s+/g, '_').toUpperCase();
-        TILESETS[ts.name].tiles[key] = {
-          id: tile.id,
-          name: tile.name,
-          texture: tile.texture,
-          walkable: tile.walkable,
-          cost_walk_points: tile.cost_walk_points,
-          liquid: tile.liquid || false
-        };
-      }
-    }
-  } catch (err) {
-    console.error('❌ Failed to load tilesets:', err);
-    alert('Could not load map data from the database.');
-    return;
-  }
-
-  // ✅ Populate tileset dropdown with displayName
-  $('#tileset').empty();
-  for (const [name, obj] of Object.entries(TILESETS)) {
-    $('#tileset').append(`<option value="${name}">${obj.displayName}</option>`);
-  }
-
-  // ✅ Auto-fill map name on selection
-  $('#tileset').on('change', function() {
-    const selected = $(this).val();
-    $('#mapName').val(TILESETS[selected].displayName);
-  });
-
-  // ✅ Set initial map name and dropdown correctly
-  const firstTileset = Object.keys(TILESETS)[0];
-  if (firstTileset) {
-    $('#tileset').val(firstTileset);
-    $('#mapName').val(TILESETS[firstTileset].displayName);
-  }
-
-  let map = [];
-  let selectedTileset = null;
-  let tileSize = 64;
-
-  $('#startEditing').on('click', () => {
-    const width = parseInt($('#mapWidth').val());
-    const height = parseInt($('#mapHeight').val());
-    tileSize = parseInt($('#previewSize').val());
-    selectedTileset = $('#tileset').val();
-    const name = TILESETS[selectedTileset].displayName;
-
-    if (!TILESETS[selectedTileset]) return alert('Invalid tileset selected.');
-
-    $('#setup').hide();
-    $('#toolbar').css('display', 'flex');
-    $('#map').css({
-      display: 'grid',
-      gridTemplateColumns: `repeat(${width}, ${tileSize}px)`,
-      gridTemplateRows: `repeat(${height}, ${tileSize}px)`
-    });
-    $('#mapTitle').text(`${name} (${TILESETS[selectedTileset].displayName})`);
-
-    const tileset = TILESETS[selectedTileset].tiles;
-    $('#blockType').empty();
-    for (const [key, val] of Object.entries(tileset)) {
-      $('#blockType').append(`<option value="${key}">${val.name}</option>`);
-    }
-
-    $('#tilePreview').css({ width: 128, height: 128 });
-    updatePreview();
-
-    // ✅ Create grid
-    $('#map').empty();
-    for (let y = 0; y < height; y++) {
-      for (let x = 0; x < width; x++) {
-        const $tile = $('<div class="tile"></div>')
-          .attr('data-x', x)
-          .attr('data-y', y)
-          .css({ width: tileSize, height: tileSize });
-        $('#map').append($tile);
-      }
-    }
-  });
-
-  function updatePreview() {
-    const tileset = TILESETS[selectedTileset].tiles;
-    const type = $('#blockType').val();
-    if (tileset && tileset[type]) {
-      $('#tilePreview').css('background-image', `url(${baseURL}${tileset[type].texture})`);
-    }
-  }
-
-  $('#blockType').on('change', updatePreview);
-
-  // ✅ On tile click
-  $('#map').on('click', '.tile', function() {
-    const x = $(this).data('x');
-    const y = $(this).data('y');
-    const type = $('#blockType').val();
-    const tileset = TILESETS[selectedTileset].tiles;
-    if (!tileset[type]) return;
-
-    $(this).css('background-image', `url(${baseURL}${tileset[type].texture})`);
-
-    const tileId = tileset[type].id;
-    const existing = map.find(t => t.x === x && t.y === y);
-    if (existing) existing.tile = tileId;
-    else map.push({ x, y, tile: tileId });
-  });
-
-  $('#export').on('click', function() {
-    const name = $('#mapName').val();
-    const width = parseInt($('#mapWidth').val());
-    const height = parseInt($('#mapHeight').val());
-    const tileset = TILESETS[selectedTileset].tiles;
-    const firstTileId = Object.values(tileset)[0].id;
-
-    const fullMap = [];
-    for (let y = 0; y < height; y++) {
-      for (let x = 0; x < width; x++) {
-        const existing = map.find(t => t.x === x && t.y === y);
-        const tileId = existing ? existing.tile : firstTileId;
-        const tileEntry = Object.values(tileset).find(t => t.id === tileId);
-        const tileUrl = tileEntry ? tileEntry.texture : '';
-        fullMap.push({ x, y, tile: tileId, url: tileUrl });
-      }
-    }
-
-    const json = JSON.stringify({
-      name, // Proper case — "Ashen Peaks" or "Thornwood"
-      mapName: selectedTileset, // lower-case key — "ashen_peaks" or "thornwood"
-      width,
-      height,
-      data: fullMap
-    }, null, 2);
-
-    $('#output').val(json);
-    downloadJSON(name + '.json', json);
-  });
-
-  function downloadJSON(filename, text) {
-    const blob = new Blob([text], { type: 'application/json' });
-    const link = document.createElement('a');
-    link.href = URL.createObjectURL(blob);
-    link.download = filename;
-    link.click();
-  }
-
-
-
-  // ✅ Import JSON
-// ✅ Add Import JSON button *after* DOM is ready
-  $(document).ready(() => {
-    const importInput = $('<input type="file" accept=".json" style="display:none">');
-    $('body').append(importInput);
-
-    const importBtn = $('<button id="import">Import JSON</button>');
-    $('#export').before(importBtn);
-
-    importBtn.on('click', () => importInput.click());
-
-    importInput.on('change', async function(e) {
-      const file = e.target.files[0];
-      if (!file) return;
-      try {
-        const text = await file.text();
-        const json = JSON.parse(text);
-        setTimeout(() => loadImportedMap(json), 100);
-      } catch (err) {
-        console.error('❌ Failed to import map:', err);
-        alert('Invalid JSON file or format.');
-      }
-    });
-  });
-  
-function loadImportedMap(json) {
-  const { name, mapName, width, height, data } = json;
-
-  if (!TILESETS[mapName]) {
-    alert(`Tileset "${mapName}" not found in loaded TILESETS.`);
-    return;
-  }
-
-  selectedTileset = mapName;
-  const tileset = TILESETS[selectedTileset].tiles;
-  tileSize = parseInt($('#previewSize').val());
-
-  $('#setup').hide();
-  $('#toolbar').css('display', 'flex');
-  $('#map').empty();
-
-  $('#mapTitle').text(name);
-  $('#mapName').val(name);
-  $('#mapWidth').val(width);
-  $('#mapHeight').val(height);
-
-  $('#blockType').empty();
-  for (const [key, val] of Object.entries(tileset)) {
-    $('#blockType').append(`<option value="${key}">${val.name}</option>`);
-  }
-  updatePreview();
-
-  $('#map').css({
-    display: 'grid',
-    gridTemplateColumns: `repeat(${width}, ${tileSize}px)`,
-    gridTemplateRows: `repeat(${height}, ${tileSize}px)`
-  });
-
-  map = [];
-  for (let y = 0; y < height; y++) {
-    for (let x = 0; x < width; x++) {
-      const tileData = data.find(t => t.x === x && t.y === y);
-      const texture = tileData ? tileData.url : '';
-      const $tile = $('<div class="tile"></div>')
-        .attr('data-x', x)
-        .attr('data-y', y)
-        .css({
-          width: tileSize,
-          height: tileSize,
-          backgroundImage: texture ? `url(${baseURL}${texture})` : 'none'
-        });
-      $('#map').append($tile);
-      if (tileData) map.push({ x, y, tile: tileData.tile });
-    }
-  }
-}
-
-
-
-});
-</script>
+<script src="js/editor.js"></script>
 </body>
 </html>
