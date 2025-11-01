@@ -11,7 +11,7 @@ const players = [
 		username: 'Player 1',
 		x: 1,
 		y: 1,
-		fow: 6,
+		fow: 5,
 		hp: 10,
 		movePoints: 10,
 		currentMap: 'ashen_peaks',

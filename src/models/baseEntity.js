@@ -5,6 +5,7 @@ const entitySchema = new mongoose.Schema({
   slug: {
     type: String,
     required: true,
+    // not unique in this case
   },
   displayName: {
     type: String,
@@ -21,7 +22,17 @@ const entitySchema = new mongoose.Schema({
   texture: {
     type: String,
     required: true
-  }
+  },
+  x: { 
+    type: Number, 
+    required: true,
+    default: 0
+  },
+  y: { 
+    type: Number, 
+    required: true,
+    default: 0
+  },
 });
 
 const Entity = mongoose.model('Entity', entitySchema);
