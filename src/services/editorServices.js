@@ -42,14 +42,14 @@ export async function getEntityModels() {
       ]
     },
     {
-      name: "Tree",
-      type: "tree",
+      name: "Peasant",
+      type: "peasant",
       fields: [
-        { key: "slug", label: "Slug", type: "text", required: true },
+        { key: "slug", label: "Slug", type: "text", required: true, value: "entity_npc_peasant_01.webp" },
         { key: "displayName", label: "Display Name", type: "text", required: true },
-        { key: "texture", label: "Texture Path", type: "text", required: true },
+        { key: "texture", label: "Texture Path", type: "text", required: true, value : "/images/entities/npc/entity_npc_peasant_01.webp" },
         { key: "x", label: "X", type: "number", required: true },
-        { key: "y", label: "Y", type: "number", required: true }
+        { key: "y", label: "Y", type: "number", required: true },
       ]
     }
   ];

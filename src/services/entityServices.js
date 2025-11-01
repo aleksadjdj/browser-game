@@ -40,25 +40,3 @@ export async function portalService(player, entity) {
   }
 }
 
-
-/*
-export async function chestService(player, entity) {
-  console.log(`🎁 Player ${player.id} opens chest ${entity.slug}`);
-  const res = await fetch(`/api/player/${player.id}/open-chest`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ entitySlug: entity.slug })
-  });
-  return await res.json();
-}
-
-export async function npcService(player, entity) {
-  console.log(`💬 Talking to NPC ${entity.displayName}`);
-  const res = await fetch(`/api/player/${player.id}/talk-npc`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ entitySlug: entity.slug })
-  });
-  return await res.json();
-}
-*/

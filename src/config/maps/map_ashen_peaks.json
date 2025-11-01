@@ -425,6 +425,15 @@
       "destX": 0,
       "destY": 1,
       "type": "portal"
+    },
+    {
+      "slug": "entity_npc_peasant_01.webp",
+      "displayName": "Aca the Flateartherzoid",
+      "texture": "/images/entities/npc/entity_npc_peasant_01.webp",
+      "mapSlug": "ashen_peaks",
+      "x": 4,
+      "y": 4,
+      "type": "peasant"
     }
   ]
 }
