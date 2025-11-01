@@ -165,18 +165,23 @@ async renderNearbyEntities(entities = []) {
     }
 
     const marker = document.createElement("div");
-    marker.classList.add("entity");
-    Object.assign(marker.style, {
-      position: "absolute",
-      left: tileEl.style.left,
-      top: tileEl.style.top,
-      width: tileEl.style.width,
-      height: tileEl.style.height,
-      backgroundImage: `url(${entity.texture || ""})`,
-      backgroundSize: "cover",
-      zIndex: 2,
-      pointerEvents: "none"
-    });
+      marker.classList.add("entity");
+      Object.assign(marker.style, {
+        position: "absolute",
+        left: tileEl.style.left,
+        top: tileEl.style.top,
+        width: tileEl.style.width,
+        height: tileEl.style.height,
+        backgroundImage: `url(${entity.texture || ""})`,
+        backgroundSize: "cover",
+        zIndex: 2,
+        pointerEvents: "none"
+      });
+
+  marker.dataset.x = entity.x;
+  marker.dataset.y = entity.y;
+  marker.entityData = entity; // store reference
+  this.mapContainer.appendChild(marker);
 
     // Optional: label above entity
     const label = document.createElement("div");
@@ -195,6 +200,7 @@ async renderNearbyEntities(entities = []) {
     });
 
     marker.appendChild(label);
+    marker.entityData = entity; // ✅ store reference
     this.mapContainer.appendChild(marker);
   }
 
@@ -203,47 +209,66 @@ async renderNearbyEntities(entities = []) {
 }
 
 
+renderMap(tiles, player) {
+  if (!this.mapContainer) return;
+  this.mapContainer.innerHTML = "";
 
-  renderMap(tiles, player) {
-    if (!this.mapContainer) return;
-    this.mapContainer.innerHTML = "";
-    const minX = Math.min(...tiles.map(t => t.x));
-    const minY = Math.min(...tiles.map(t => t.y));
-    const width = Math.max(...tiles.map(t => t.x)) - minX + 1;
-    const height = Math.max(...tiles.map(t => t.y)) - minY + 1;
-    const tileSize = this.tileSize || 64;
-    const fow = player.fow || 5;
-    const containerSize = fow * tileSize;
-    Object.assign(this.mapContainer.style, {
-      position: "relative",
-      width: `${containerSize}px`,
-      height: `${containerSize}px`,
-      border: "1px solid #aaa",
-      backgroundColor: "#000000",
+  const minX = Math.min(...tiles.map(t => t.x));
+  const minY = Math.min(...tiles.map(t => t.y));
+  const tileSize = this.tileSize || 64;
+  const fow = player.fow || 5;
+  const containerSize = fow * tileSize;
+
+  Object.assign(this.mapContainer.style, {
+    position: "relative",
+    width: `${containerSize}px`,
+    height: `${containerSize}px`,
+    border: "1px solid #aaa",
+    backgroundColor: "#000000",
+  });
+
+  for (const t of tiles) {
+    const tileDiv = document.createElement("div");
+    tileDiv.classList.add("tile");
+    tileDiv.dataset.x = t.x;
+    tileDiv.dataset.y = t.y;
+
+    Object.assign(tileDiv.style, {
+      position: "absolute",
+      left: `${(t.x - minX) * tileSize}px`,
+      top: `${(t.y - minY) * tileSize}px`,
+      width: `${tileSize}px`,
+      height: `${tileSize}px`,
+      backgroundImage: `url(${t.textureUrl})`,
+      backgroundSize: "cover",
+      border: "1px solid rgba(0,0,0,0.1)"
     });
-    for (const t of tiles) {
-      const tileDiv = document.createElement("div");
-      tileDiv.classList.add("tile");
-      tileDiv.dataset.x = t.x;
-      tileDiv.dataset.y = t.y;
-      Object.assign(tileDiv.style, {
-        position: "absolute",
-        left: `${(t.x - minX) * this.tileSize}px`,
-        top: `${(t.y - minY) * this.tileSize}px`,
-        width: `${this.tileSize}px`,
-        height: `${this.tileSize}px`,
-        backgroundImage: `url(${t.textureUrl})`,
-        backgroundSize: "cover",
-        border: "1px solid rgba(0,0,0,0.1)"
-      });
-      if (t.x === player.x && t.y === player.y) {
-        tileDiv.style.outline = "2px solid blue";
-        tileDiv.style.zIndex = "2";
-      }
-      tileDiv.addEventListener("click", () => this.onTileClick(tileDiv));
-      this.mapContainer.appendChild(tileDiv);
+
+    if (t.x === player.x && t.y === player.y) {
+      tileDiv.style.outline = "2px solid blue";
+      tileDiv.style.zIndex = "2";
     }
+
+    // ✅ Unified click handler
+    tileDiv.addEventListener("click", async () => {
+      const tx = parseInt(tileDiv.dataset.x);
+      const ty = parseInt(tileDiv.dataset.y);
+
+      // 1️⃣ Check if an entity exists on this tile
+      const entityEl = this.mapContainer.querySelector(`.entity[data-x="${tx}"][data-y="${ty}"]`);
+      if (entityEl?.entityData) {
+        await this.interactWithEntity(entityEl.entityData);
+        return;
+      }
+
+      // 2️⃣ Otherwise, normal player movement
+      await this.movePlayer(tx, ty);
+    });
+
+    this.mapContainer.appendChild(tileDiv);
   }
+}
+
 
   async onTileClick(tileDiv) {
     const tx = parseInt(tileDiv.dataset.x);
@@ -279,6 +304,36 @@ async renderNearbyEntities(entities = []) {
       console.error("❌ Move request failed:", err);
     }
   }
+
+
+async interactWithEntity(entity) {
+  if (!entity) return;
+
+  try {
+    // ✅ Correct endpoint prefix: /api/entity instead of /api/player
+    const res = await fetch(`/api/entity/${this.id}/interact-entity`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ entitySlug: entity.slug })
+    });
+
+    const data = await res.json();
+
+    if (res.ok && data.success) {
+      this.log(`✨ Interacted with ${entity.displayName || entity.slug}`);
+      
+      // ✅ If player got teleported, refresh everything
+      await this.loadPlayer();      
+      await this.loadPlayerMap();
+    } else {
+      this.log(`⚠️ Interaction failed: ${data.message || "Unknown error"}`);
+    }
+
+  } catch (err) {
+    console.error("❌ Interaction request failed:", err);
+    this.log("❌ Interaction failed: Network or server error");
+  }
+}
 
 
 

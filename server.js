@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 
 import connectDB from "./src/config/db/db.js";
 import playerRoutes from "./src/routes/playerRoutes.js";
+import entityRoutes from "./src/routes/entityRoutes.js";
 import mapEditorRoutes from "./src/routes/mapEditorRoutes.js";
 
 dotenv.config();
@@ -25,6 +26,7 @@ app.use(express.static("public"));
 // ✅ Mount routes
 app.use('/api/editor', mapEditorRoutes);
 app.use('/api/player', playerRoutes);
+app.use('/api/entity', entityRoutes);
 
 
 

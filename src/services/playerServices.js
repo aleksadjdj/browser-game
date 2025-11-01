@@ -212,7 +212,7 @@ export async function getNearbyPlayersService(id) {
 
 
 
-
+// get all entities in players range 
 export async function getNearbyEntitiesService(playerId) {
   // 1️⃣ Find the main player
   const player = await Player.findOne({ id: playerId });
