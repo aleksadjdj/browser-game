@@ -423,7 +423,7 @@
       "y": 5,
       "destMapSlug": "dirty_old_house_01",
       "destX": 0,
-      "destY": 0,
+      "destY": 1,
       "type": "portal"
     }
   ]

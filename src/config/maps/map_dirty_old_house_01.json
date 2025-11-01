@@ -1,101 +1,11 @@
 {
   "slug": "dirty_old_house_01",
   "displayName": "Dirty Old House",
-  "width": 8,
-  "height": 8,
+  "width": 10,
+  "height": 4,
   "data": [
     {
       "x": 0,
-      "y": 0,
-      "tileSlug": "tile_dirty_old_house_01_wooden_floor_01",
-      "textureUrl": "/images/maps/dirty_old_house_01/tile_dirty_old_house_01_wooden_floor_01.jpg"
-    },
-    {
-      "x": 1,
-      "y": 0,
-      "tileSlug": "tile_dirty_old_house_01_wooden_floor_01",
-      "textureUrl": "/images/maps/dirty_old_house_01/tile_dirty_old_house_01_wooden_floor_01.jpg"
-    },
-    {
-      "x": 2,
-      "y": 0,
-      "tileSlug": "tile_dirty_old_house_01_wooden_floor_01",
-      "textureUrl": "/images/maps/dirty_old_house_01/tile_dirty_old_house_01_wooden_floor_01.jpg"
-    },
-    {
-      "x": 3,
-      "y": 0,
-      "tileSlug": "tile_dirty_old_house_01_wooden_floor_01",
-      "textureUrl": "/images/maps/dirty_old_house_01/tile_dirty_old_house_01_wooden_floor_01.jpg"
-    },
-    {
-      "x": 4,
-      "y": 0,
-      "tileSlug": "tile_dirty_old_house_01_wooden_floor_01",
-      "textureUrl": "/images/maps/dirty_old_house_01/tile_dirty_old_house_01_wooden_floor_01.jpg"
-    },
-    {
-      "x": 5,
-      "y": 0,
-      "tileSlug": "tile_dirty_old_house_01_wooden_floor_01",
-      "textureUrl": "/images/maps/dirty_old_house_01/tile_dirty_old_house_01_wooden_floor_01.jpg"
-    },
-    {
-      "x": 6,
-      "y": 0,
-      "tileSlug": "tile_dirty_old_house_01_wooden_floor_01",
-      "textureUrl": "/images/maps/dirty_old_house_01/tile_dirty_old_house_01_wooden_floor_01.jpg"
-    },
-    {
-      "x": 7,
-      "y": 0,
-      "tileSlug": "tile_dirty_old_house_01_wooden_floor_01",
-      "textureUrl": "/images/maps/dirty_old_house_01/tile_dirty_old_house_01_wooden_floor_01.jpg"
-    },
-    {
-      "x": 7,
-      "y": 1,
-      "tileSlug": "tile_dirty_old_house_01_wooden_floor_01",
-      "textureUrl": "/images/maps/dirty_old_house_01/tile_dirty_old_house_01_wooden_floor_01.jpg"
-    },
-    {
-      "x": 6,
-      "y": 1,
-      "tileSlug": "tile_dirty_old_house_01_wooden_floor_01",
-      "textureUrl": "/images/maps/dirty_old_house_01/tile_dirty_old_house_01_wooden_floor_01.jpg"
-    },
-    {
-      "x": 5,
-      "y": 1,
-      "tileSlug": "tile_dirty_old_house_01_wooden_floor_01",
-      "textureUrl": "/images/maps/dirty_old_house_01/tile_dirty_old_house_01_wooden_floor_01.jpg"
-    },
-    {
-      "x": 4,
-      "y": 1,
-      "tileSlug": "tile_dirty_old_house_01_wooden_floor_01",
-      "textureUrl": "/images/maps/dirty_old_house_01/tile_dirty_old_house_01_wooden_floor_01.jpg"
-    },
-    {
-      "x": 3,
-      "y": 1,
-      "tileSlug": "tile_dirty_old_house_01_wooden_floor_01",
-      "textureUrl": "/images/maps/dirty_old_house_01/tile_dirty_old_house_01_wooden_floor_01.jpg"
-    },
-    {
-      "x": 2,
-      "y": 1,
-      "tileSlug": "tile_dirty_old_house_01_wooden_floor_01",
-      "textureUrl": "/images/maps/dirty_old_house_01/tile_dirty_old_house_01_wooden_floor_01.jpg"
-    },
-    {
-      "x": 1,
-      "y": 1,
-      "tileSlug": "tile_dirty_old_house_01_wooden_floor_01",
-      "textureUrl": "/images/maps/dirty_old_house_01/tile_dirty_old_house_01_wooden_floor_01.jpg"
-    },
-    {
-      "x": 0,
       "y": 1,
       "tileSlug": "tile_dirty_old_house_01_wooden_floor_01",
       "textureUrl": "/images/maps/dirty_old_house_01/tile_dirty_old_house_01_wooden_floor_01.jpg"
@@ -113,182 +23,32 @@
       "textureUrl": "/images/maps/dirty_old_house_01/tile_dirty_old_house_01_wooden_floor_01.jpg"
     },
     {
-      "x": 2,
-      "y": 2,
-      "tileSlug": "tile_dirty_old_house_01_wooden_floor_01",
-      "textureUrl": "/images/maps/dirty_old_house_01/tile_dirty_old_house_01_wooden_floor_01.jpg"
-    },
-    {
-      "x": 3,
-      "y": 2,
-      "tileSlug": "tile_dirty_old_house_01_wooden_floor_01",
-      "textureUrl": "/images/maps/dirty_old_house_01/tile_dirty_old_house_01_wooden_floor_01.jpg"
-    },
-    {
-      "x": 4,
-      "y": 2,
-      "tileSlug": "tile_dirty_old_house_01_wooden_floor_01",
-      "textureUrl": "/images/maps/dirty_old_house_01/tile_dirty_old_house_01_wooden_floor_01.jpg"
-    },
-    {
-      "x": 5,
-      "y": 2,
-      "tileSlug": "tile_dirty_old_house_01_wooden_floor_01",
-      "textureUrl": "/images/maps/dirty_old_house_01/tile_dirty_old_house_01_wooden_floor_01.jpg"
-    },
-    {
-      "x": 6,
-      "y": 2,
-      "tileSlug": "tile_dirty_old_house_01_wooden_floor_01",
-      "textureUrl": "/images/maps/dirty_old_house_01/tile_dirty_old_house_01_wooden_floor_01.jpg"
-    },
-    {
-      "x": 7,
-      "y": 2,
-      "tileSlug": "tile_dirty_old_house_01_wooden_floor_01",
-      "textureUrl": "/images/maps/dirty_old_house_01/tile_dirty_old_house_01_wooden_floor_01.jpg"
-    },
-    {
-      "x": 7,
-      "y": 3,
-      "tileSlug": "tile_dirty_old_house_01_wooden_floor_01",
-      "textureUrl": "/images/maps/dirty_old_house_01/tile_dirty_old_house_01_wooden_floor_01.jpg"
-    },
-    {
-      "x": 7,
-      "y": 4,
-      "tileSlug": "tile_dirty_old_house_01_wooden_floor_01",
-      "textureUrl": "/images/maps/dirty_old_house_01/tile_dirty_old_house_01_wooden_floor_01.jpg"
-    },
-    {
-      "x": 7,
-      "y": 5,
-      "tileSlug": "tile_dirty_old_house_01_wooden_floor_01",
-      "textureUrl": "/images/maps/dirty_old_house_01/tile_dirty_old_house_01_wooden_floor_01.jpg"
-    },
-    {
-      "x": 7,
-      "y": 6,
-      "tileSlug": "tile_dirty_old_house_01_wooden_floor_01",
-      "textureUrl": "/images/maps/dirty_old_house_01/tile_dirty_old_house_01_wooden_floor_01.jpg"
-    },
-    {
-      "x": 7,
-      "y": 7,
-      "tileSlug": "tile_dirty_old_house_01_wooden_floor_01",
-      "textureUrl": "/images/maps/dirty_old_house_01/tile_dirty_old_house_01_wooden_floor_01.jpg"
-    },
-    {
-      "x": 6,
-      "y": 7,
-      "tileSlug": "tile_dirty_old_house_01_wooden_floor_01",
-      "textureUrl": "/images/maps/dirty_old_house_01/tile_dirty_old_house_01_wooden_floor_01.jpg"
-    },
-    {
-      "x": 5,
-      "y": 7,
-      "tileSlug": "tile_dirty_old_house_01_wooden_floor_01",
-      "textureUrl": "/images/maps/dirty_old_house_01/tile_dirty_old_house_01_wooden_floor_01.jpg"
-    },
-    {
-      "x": 3,
-      "y": 7,
-      "tileSlug": "tile_dirty_old_house_01_wooden_floor_01",
-      "textureUrl": "/images/maps/dirty_old_house_01/tile_dirty_old_house_01_wooden_floor_01.jpg"
-    },
-    {
-      "x": 4,
-      "y": 7,
-      "tileSlug": "tile_dirty_old_house_01_wooden_floor_01",
-      "textureUrl": "/images/maps/dirty_old_house_01/tile_dirty_old_house_01_wooden_floor_01.jpg"
-    },
-    {
-      "x": 2,
-      "y": 7,
-      "tileSlug": "tile_dirty_old_house_01_wooden_floor_01",
-      "textureUrl": "/images/maps/dirty_old_house_01/tile_dirty_old_house_01_wooden_floor_01.jpg"
-    },
-    {
       "x": 1,
-      "y": 7,
-      "tileSlug": "tile_dirty_old_house_01_wooden_floor_01",
-      "textureUrl": "/images/maps/dirty_old_house_01/tile_dirty_old_house_01_wooden_floor_01.jpg"
-    },
-    {
-      "x": 0,
-      "y": 7,
-      "tileSlug": "tile_dirty_old_house_01_wooden_floor_01",
-      "textureUrl": "/images/maps/dirty_old_house_01/tile_dirty_old_house_01_wooden_floor_01.jpg"
-    },
-    {
-      "x": 0,
-      "y": 6,
-      "tileSlug": "tile_dirty_old_house_01_wooden_floor_01",
-      "textureUrl": "/images/maps/dirty_old_house_01/tile_dirty_old_house_01_wooden_floor_01.jpg"
-    },
-    {
-      "x": 0,
-      "y": 5,
-      "tileSlug": "tile_dirty_old_house_01_wooden_floor_01",
-      "textureUrl": "/images/maps/dirty_old_house_01/tile_dirty_old_house_01_wooden_floor_01.jpg"
-    },
-    {
-      "x": 0,
-      "y": 4,
-      "tileSlug": "tile_dirty_old_house_01_wooden_floor_01",
-      "textureUrl": "/images/maps/dirty_old_house_01/tile_dirty_old_house_01_wooden_floor_01.jpg"
-    },
-    {
-      "x": 0,
-      "y": 3,
-      "tileSlug": "tile_dirty_old_house_01_wooden_floor_01",
-      "textureUrl": "/images/maps/dirty_old_house_01/tile_dirty_old_house_01_wooden_floor_01.jpg"
-    },
-    {
-      "x": 1,
-      "y": 3,
-      "tileSlug": "tile_dirty_old_house_01_wooden_floor_01",
-      "textureUrl": "/images/maps/dirty_old_house_01/tile_dirty_old_house_01_wooden_floor_01.jpg"
-    },
-    {
-      "x": 1,
-      "y": 4,
-      "tileSlug": "tile_dirty_old_house_01_wooden_floor_01",
-      "textureUrl": "/images/maps/dirty_old_house_01/tile_dirty_old_house_01_wooden_floor_01.jpg"
-    },
-    {
-      "x": 1,
-      "y": 5,
-      "tileSlug": "tile_dirty_old_house_01_wooden_floor_01",
-      "textureUrl": "/images/maps/dirty_old_house_01/tile_dirty_old_house_01_wooden_floor_01.jpg"
-    },
-    {
-      "x": 1,
-      "y": 6,
+      "y": 1,
       "tileSlug": "tile_dirty_old_house_01_wooden_floor_01",
       "textureUrl": "/images/maps/dirty_old_house_01/tile_dirty_old_house_01_wooden_floor_01.jpg"
     },
     {
       "x": 2,
-      "y": 6,
+      "y": 1,
       "tileSlug": "tile_dirty_old_house_01_wooden_floor_01",
       "textureUrl": "/images/maps/dirty_old_house_01/tile_dirty_old_house_01_wooden_floor_01.jpg"
     },
     {
       "x": 2,
-      "y": 5,
+      "y": 0,
+      "tileSlug": "tile_dirty_old_house_01_wooden_floor_01",
+      "textureUrl": "/images/maps/dirty_old_house_01/tile_dirty_old_house_01_wooden_floor_01.jpg"
+    },
+    {
+      "x": 2,
+      "y": 2,
       "tileSlug": "tile_dirty_old_house_01_wooden_floor_01",
       "textureUrl": "/images/maps/dirty_old_house_01/tile_dirty_old_house_01_wooden_floor_01.jpg"
     },
     {
       "x": 2,
       "y": 3,
-      "tileSlug": "tile_dirty_old_house_01_wooden_floor_01",
-      "textureUrl": "/images/maps/dirty_old_house_01/tile_dirty_old_house_01_wooden_floor_01.jpg"
-    },
-    {
-      "x": 2,
-      "y": 4,
       "tileSlug": "tile_dirty_old_house_01_wooden_floor_01",
       "textureUrl": "/images/maps/dirty_old_house_01/tile_dirty_old_house_01_wooden_floor_01.jpg"
     },
@@ -300,48 +60,78 @@
     },
     {
       "x": 3,
-      "y": 4,
+      "y": 2,
       "tileSlug": "tile_dirty_old_house_01_wooden_floor_01",
       "textureUrl": "/images/maps/dirty_old_house_01/tile_dirty_old_house_01_wooden_floor_01.jpg"
     },
     {
       "x": 3,
-      "y": 5,
+      "y": 1,
       "tileSlug": "tile_dirty_old_house_01_wooden_floor_01",
       "textureUrl": "/images/maps/dirty_old_house_01/tile_dirty_old_house_01_wooden_floor_01.jpg"
     },
     {
       "x": 3,
-      "y": 6,
+      "y": 0,
       "tileSlug": "tile_dirty_old_house_01_wooden_floor_01",
       "textureUrl": "/images/maps/dirty_old_house_01/tile_dirty_old_house_01_wooden_floor_01.jpg"
     },
     {
       "x": 4,
-      "y": 6,
+      "y": 1,
       "tileSlug": "tile_dirty_old_house_01_wooden_floor_01",
       "textureUrl": "/images/maps/dirty_old_house_01/tile_dirty_old_house_01_wooden_floor_01.jpg"
     },
     {
       "x": 4,
-      "y": 5,
-      "tileSlug": "tile_dirty_old_house_01_wooden_floor_01",
-      "textureUrl": "/images/maps/dirty_old_house_01/tile_dirty_old_house_01_wooden_floor_01.jpg"
-    },
-    {
-      "x": 4,
-      "y": 4,
-      "tileSlug": "tile_dirty_old_house_01_wooden_floor_01",
-      "textureUrl": "/images/maps/dirty_old_house_01/tile_dirty_old_house_01_wooden_floor_01.jpg"
-    },
-    {
-      "x": 4,
-      "y": 3,
+      "y": 2,
       "tileSlug": "tile_dirty_old_house_01_wooden_floor_01",
       "textureUrl": "/images/maps/dirty_old_house_01/tile_dirty_old_house_01_wooden_floor_01.jpg"
     },
     {
       "x": 5,
+      "y": 2,
+      "tileSlug": "tile_dirty_old_house_01_wooden_floor_01",
+      "textureUrl": "/images/maps/dirty_old_house_01/tile_dirty_old_house_01_wooden_floor_01.jpg"
+    },
+    {
+      "x": 5,
+      "y": 1,
+      "tileSlug": "tile_dirty_old_house_01_wooden_floor_01",
+      "textureUrl": "/images/maps/dirty_old_house_01/tile_dirty_old_house_01_wooden_floor_01.jpg"
+    },
+    {
+      "x": 6,
+      "y": 1,
+      "tileSlug": "tile_dirty_old_house_01_wooden_floor_01",
+      "textureUrl": "/images/maps/dirty_old_house_01/tile_dirty_old_house_01_wooden_floor_01.jpg"
+    },
+    {
+      "x": 6,
+      "y": 0,
+      "tileSlug": "tile_dirty_old_house_01_wooden_floor_01",
+      "textureUrl": "/images/maps/dirty_old_house_01/tile_dirty_old_house_01_wooden_floor_01.jpg"
+    },
+    {
+      "x": 7,
+      "y": 0,
+      "tileSlug": "tile_dirty_old_house_01_wooden_floor_01",
+      "textureUrl": "/images/maps/dirty_old_house_01/tile_dirty_old_house_01_wooden_floor_01.jpg"
+    },
+    {
+      "x": 7,
+      "y": 1,
+      "tileSlug": "tile_dirty_old_house_01_wooden_floor_01",
+      "textureUrl": "/images/maps/dirty_old_house_01/tile_dirty_old_house_01_wooden_floor_01.jpg"
+    },
+    {
+      "x": 7,
+      "y": 2,
+      "tileSlug": "tile_dirty_old_house_01_wooden_floor_01",
+      "textureUrl": "/images/maps/dirty_old_house_01/tile_dirty_old_house_01_wooden_floor_01.jpg"
+    },
+    {
+      "x": 7,
       "y": 3,
       "tileSlug": "tile_dirty_old_house_01_wooden_floor_01",
       "textureUrl": "/images/maps/dirty_old_house_01/tile_dirty_old_house_01_wooden_floor_01.jpg"
@@ -354,37 +144,31 @@
     },
     {
       "x": 6,
-      "y": 4,
+      "y": 2,
       "tileSlug": "tile_dirty_old_house_01_wooden_floor_01",
       "textureUrl": "/images/maps/dirty_old_house_01/tile_dirty_old_house_01_wooden_floor_01.jpg"
     },
     {
-      "x": 6,
-      "y": 5,
+      "x": 8,
+      "y": 2,
       "tileSlug": "tile_dirty_old_house_01_wooden_floor_01",
       "textureUrl": "/images/maps/dirty_old_house_01/tile_dirty_old_house_01_wooden_floor_01.jpg"
     },
     {
-      "x": 6,
-      "y": 6,
+      "x": 8,
+      "y": 1,
       "tileSlug": "tile_dirty_old_house_01_wooden_floor_01",
       "textureUrl": "/images/maps/dirty_old_house_01/tile_dirty_old_house_01_wooden_floor_01.jpg"
     },
     {
-      "x": 5,
-      "y": 6,
+      "x": 9,
+      "y": 1,
       "tileSlug": "tile_dirty_old_house_01_wooden_floor_01",
       "textureUrl": "/images/maps/dirty_old_house_01/tile_dirty_old_house_01_wooden_floor_01.jpg"
     },
     {
-      "x": 5,
-      "y": 5,
-      "tileSlug": "tile_dirty_old_house_01_wooden_floor_01",
-      "textureUrl": "/images/maps/dirty_old_house_01/tile_dirty_old_house_01_wooden_floor_01.jpg"
-    },
-    {
-      "x": 5,
-      "y": 4,
+      "x": 9,
+      "y": 2,
       "tileSlug": "tile_dirty_old_house_01_wooden_floor_01",
       "textureUrl": "/images/maps/dirty_old_house_01/tile_dirty_old_house_01_wooden_floor_01.jpg"
     }
@@ -392,11 +176,11 @@
   "entities": [
     {
       "slug": "static_entity_portal_01.gif",
-      "displayName": "Portal to Ashen Peaks",
+      "displayName": "Portal to Ashen peaks",
       "texture": "/images/entities/static/portals/static_entity_portal_01.gif",
       "mapSlug": "dirty_old_house_01",
-      "x": 3,
-      "y": 3,
+      "x": 9,
+      "y": 1,
       "destMapSlug": "ashen_peaks",
       "destX": 0,
       "destY": 0,
