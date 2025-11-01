@@ -27,11 +27,15 @@ body {
 
 #log {
   margin-left: 20px;
-  height: 100px;
+  height: 150px;
   width: 500px;
   max-height: 150px;
   overflow-y: auto;
   border: 1px solid #ccc;
   padding: 5px;
   font-family: monospace;
+}
+
+#output {
+  display: none;
 }

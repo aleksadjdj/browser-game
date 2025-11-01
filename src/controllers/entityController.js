@@ -1,9 +1,9 @@
-import mongoose from "mongoose";
 import Entity from "../models/baseEntity.js";
 import { EntityPortal } from "../models/entityPortal.js"; // adjust path
 import Player from "../models/player.js";
 import { 
   portalService,
+  peasantService,
  } from "../services/entityServices.js";
 
 export async function interactEntityController(req, res) {
@@ -41,10 +41,9 @@ export async function interactEntityController(req, res) {
     let result;
     if (entity.type === "portal") {
       result = await portalService(player, entity); // pass full player doc
-    
     } 
     else if (entity.type === "peasant") {
-      //
+      result = await peasantService(player, entity);
     }
     else {
       // handle other entity types...

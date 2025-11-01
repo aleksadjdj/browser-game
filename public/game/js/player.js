@@ -1,4 +1,8 @@
 export class Player {
+
+  static DEFAULT_TILE_SIZE = 64;
+  static DEBUG = false;
+  
   constructor(mapContainerId = "map", tileSize = 64, playerId = "player_uuid_1") {
     this.mapContainer = document.getElementById(mapContainerId);
     this.tileSize = tileSize;
@@ -32,7 +36,7 @@ export class Player {
       if (!res.ok) throw new Error("Failed to load player.");
       this.player = await res.json();
       document.getElementById("output").textContent = JSON.stringify(this.player, null, 2);
-      this.log("✅ Player loaded successfully.");
+      this.DEBUG && this.log("✅ Player loaded successfully.");
     } catch (err) {
       console.error("❌ Failed to load player:", err);
       document.getElementById("output").textContent = "Failed to load player data.";
@@ -111,7 +115,7 @@ export class Player {
         this.mapContainer.appendChild(marker);
       }
 
-      this.log(`👥 Nearby players: ${nearbyPlayers.length}`);
+      this.DEBUG && this.log(`👥 Nearby players: ${nearbyPlayers.length}`);
     } catch (err) {
       console.error("❌ Failed to load nearby players:", err);
       this.log("❌ Failed to load nearby players.");
@@ -204,8 +208,8 @@ async renderNearbyEntities(entities = []) {
     this.mapContainer.appendChild(marker);
   }
 
-  console.log(`🟢 Rendered ${entities.length} nearby entities`);
-  this.log(`🟢 Nearby entities: ${entities.length}`);
+  this.DEBUG && console.log(`🟢 Rendered ${entities.length} nearby entities`);
+  this.DEBUG && this.log(`🟢 Nearby entities: ${entities.length}`);
 }
 
 
@@ -320,7 +324,12 @@ async interactWithEntity(entity) {
     const data = await res.json();
 
     if (res.ok && data.success) {
-      this.log(`✨ Interacted with ${entity.displayName || entity.slug}`);
+      this.DEBUG && this.log(`✨ Interacted with ${entity.displayName || entity.slug}`);
+
+      // ✅ Display the returned message from server
+      if (data.message) {
+        this.log(`💬 ${entity.displayName} says: ${data.message}`);
+      }
       
       // ✅ If player got teleported, refresh everything
       await this.loadPlayer();      
