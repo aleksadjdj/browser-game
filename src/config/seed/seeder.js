@@ -5,7 +5,7 @@ import seedMapNames from './seedMapNames.js';
 import seedMaps from './seedMaps.js';
 import seedPlayers from './seedPlayers.js';
 import seedTilesets from './seedTilesets.js';
-import seedPortals from './seedPortals.js';
+import seedEntities  from './seedEntities.js';
 
 dotenv.config();
 
@@ -35,7 +35,7 @@ async function seedData() {
     await seedMapNames();
     await seedTilesets();
     await seedMaps();
-    await seedPortals();
+    await seedEntities();
     await seedPlayers();
 
     console.log('🎉 Seeding completed successfully.');

@@ -314,7 +314,7 @@ async interactWithEntity(entity) {
     const res = await fetch(`/api/entity/${this.id}/interact-entity`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ entitySlug: entity.slug })
+      body: JSON.stringify({ entityId: entity._id }) // <-- use _id
     });
 
     const data = await res.json();

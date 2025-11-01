@@ -2,7 +2,8 @@ import express from 'express';
 import {
   getAllTilesets,
   getTilesetBySlug,
-  getAllMapNames
+  getAllMapNames,
+  getEntityModels,
 } from '../controllers/editorController.js';
 
 const router = express.Router();
@@ -19,6 +20,9 @@ router.get('/tiles', getAllTilesets);
 
 // /api/editor/tiles/thornwoood
 router.get('/tiles/:slug', getTilesetBySlug);
+
+//  /api/editor/entity-models
+router.get("/entity-models", getEntityModels);
 
 
 

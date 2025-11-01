@@ -3,6 +3,7 @@ import {
   getAllMapNames as getAllMapNamesService,
   getAllTilesets as getAllTilesetsService,
   getTilesetBySlug as getTilesetBySlugService,
+  getEntityModels as getEntityModelsService,
 } from '../services/editorServices.js';
 
 
@@ -43,5 +44,22 @@ export async function getAllMapNames(req, res) {
   } catch (err) {
     console.error('❌ Failed to fetch map names:', err);
     res.status(500).json({ error: 'Failed to fetch map names' });
+  }
+}
+
+
+
+
+
+export async function getEntityModels(req, res) {
+  try {
+    const models = await getEntityModelsService();
+    return res.json(models);
+  } catch (err) {
+    console.error("❌ Failed to load entity models:", err);
+    return res.status(500).json({
+      success: false,
+      message: "Server error loading entity models"
+    });
   }
 }

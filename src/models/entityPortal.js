@@ -4,19 +4,6 @@ import  Entity  from './baseEntity.js';
 
 // Extend with new fields
 const entityPortalSchema  = new mongoose.Schema({
-  slug: {
-    type: String,
-    required: true,
-    unique: true
-  },
-  displayName: {
-    type: String,
-    required: true
-  },
-  texture: {
-    type: String,
-    required: true
-  },
   x: { 
     type: Number, 
     required: true,

@@ -19,3 +19,38 @@ export async function getTilesetBySlug(slug) {
 }
 
 
+
+
+export async function getEntityModels() {
+  // You can manually define what you want exposed in the editor
+  // to avoid loading private or unused models dynamically
+
+  return [
+    {
+      name: "Portal",
+      type: "portal",
+      fields: [
+        { key: "slug", label: "Slug", type: "text", required: true, value: "static_entity_portal_01.gif" },
+        { key: "displayName", label: "Display Name", type: "text", required: true, value: "Portal to " },
+        { key: "texture", label: "Texture Path", type: "text", required: true, value: "/images/entities/static/portals/static_entity_portal_01.gif" },
+        { key: "mapSlug", label: "Current Map", type: "text", required: true },
+        { key: "x", label: "X Position", type: "number", required: true },
+        { key: "y", label: "Y Position", type: "number", required: true },
+        { key: "destMapSlug", label: "Destination Map", type: "text", required: true },
+        { key: "destX", label: "Destination X", type: "number", required: true },
+        { key: "destY", label: "Destination Y", type: "number", required: true }
+      ]
+    },
+    {
+      name: "Tree",
+      type: "tree",
+      fields: [
+        { key: "slug", label: "Slug", type: "text", required: true },
+        { key: "displayName", label: "Display Name", type: "text", required: true },
+        { key: "texture", label: "Texture Path", type: "text", required: true },
+        { key: "x", label: "X", type: "number", required: true },
+        { key: "y", label: "Y", type: "number", required: true }
+      ]
+    }
+  ];
+}

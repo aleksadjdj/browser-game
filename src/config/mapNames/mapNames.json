@@ -1,4 +1,5 @@
 [
-  { "slug": "ashen_peaks", "displayName": "Ashen Peaks" },
-  { "slug": "thornwood", "displayName": "Thornwood" }
+  { "slug": "ashen_peaks",          "displayName": "Ashen Peaks" },
+  { "slug": "thornwood",            "displayName": "Thornwood" },
+  { "slug": "dirty_old_house_01",  "displayName": "Dirty Old House" }
 ]

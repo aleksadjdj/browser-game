@@ -4,7 +4,7 @@
 1. portal object for going from map to map
 2. quest giver
 3. simple quest
-
+4. rpg font for client
 
 ---------------------------------------------------------------------------
 Free assets:

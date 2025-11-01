@@ -5,7 +5,6 @@ const entitySchema = new mongoose.Schema({
   slug: {
     type: String,
     required: true,
-    unique: true
   },
   displayName: {
     type: String,

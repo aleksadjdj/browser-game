@@ -24,7 +24,7 @@ export const CONFIG_TILES_THORNWOOD = {
     slug: "tile_thornwood_sand_01",
     displayName: "Thornwood Sand 01",
     textureUrl: "/images/maps/thornwood/tile_thornwood_sand_01.png",
-    walkable: false,
+    walkable: true,
     costWalkPoints: 3,
     liquid: true,
   },

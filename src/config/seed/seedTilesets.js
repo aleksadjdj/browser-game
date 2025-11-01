@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import Tileset from '../../models/tileset.js';
 import { CONFIG_TILES_ASHEN_PEAKS } from '../tiles/ashen_peaks.js';
 import { CONFIG_TILES_THORNWOOD } from '../tiles/thornwood.js';
+import { CONFIG_TILES_DIRTY_OLD_HOUSE_01 } from '../tiles/dirty_old_house_01.js';
 
 dotenv.config();
 
@@ -17,6 +18,11 @@ const tilesets = [
     mapSlug: 'thornwood', 
     displayName: 'Thornwood',
     data: CONFIG_TILES_THORNWOOD 
+  },
+  { 
+    mapSlug: 'dirty_old_house_01', 
+    displayName: 'Dirty Old House',
+    data: CONFIG_TILES_DIRTY_OLD_HOUSE_01 
   }
 ];
 

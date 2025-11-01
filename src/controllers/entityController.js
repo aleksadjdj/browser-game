@@ -1,23 +1,28 @@
+import mongoose from "mongoose";
 import Entity from "../models/baseEntity.js";
 import { EntityPortal } from "../models/entityPortal.js"; // adjust path
 import Player from "../models/player.js";
-import { portalService } from "../services/entityServices.js";
+import { 
+  portalService,
+ } from "../services/entityServices.js";
 
 export async function interactEntityController(req, res) {
   try {
     const { id } = req.params;
-    const { entitySlug } = req.body;
+      const { entityId } = req.body; //
 
     const player = await Player.findOne({ id });
     if (!player) return res.status(404).json({ success: false, message: "Player not found" });
 
-    let entity = await Entity.findOne({ slug: entitySlug });
+    let entity = await Entity.findById(entityId);
     if (!entity) return res.status(404).json({ success: false, message: "Entity not found" });
 
     // fetch proper subclass if it's a portal
     if (entity.type === "portal") {
-      const portalEntity = await EntityPortal.findOne({ slug: entitySlug });
-      if (!portalEntity) return res.status(404).json({ success: false, message: "Portal not found" });
+      const portalEntity = await EntityPortal.findById(entityId); // <-- use entityId
+      if (!portalEntity) {
+        return res.status(404).json({ success: false, message: "Portal not found" });
+      }
       entity = portalEntity; // overwrite with actual portal
     }
 
@@ -53,3 +58,4 @@ export async function interactEntityController(req, res) {
     return res.status(500).json({ success: false, message: "Server error" });
   }
 }
+

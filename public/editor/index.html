@@ -24,12 +24,26 @@
   <h2 id="mapTitle"></h2>
   <label>Block Type: <select id="blockType"></select></label>
   <div id="tilePreview"></div>
+
   <div>
     <button id="export">Export JSON</button>
     <button id="import">Import JSON</button>
   </div>
   <textarea id="output" readonly></textarea>
+
+
+  <div id="entityEditor" style="display:none; border:1px solid #ccc; padding:10px; margin-top:10px;">
+    <h3>Entity Properties</h3>
+    <label>Display Name: <input type="text" id="entityDisplayName"></label><br>
+    <label>Destination Map: <input type="text" id="entityDestMapSlug"></label><br>
+    <label>Destination X: <input type="number" id="entityDestX"></label><br>
+    <label>Destination Y: <input type="number" id="entityDestY"></label><br>
+    <button id="saveEntity">Save</button>
+  </div>
+
 </div>
+
+
 
 <div id="map"></div>
 
