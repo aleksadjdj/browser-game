@@ -60,6 +60,7 @@ export async function getPlayerMap(req, res) {
     }
 
     res.json(result.data);
+    
   } catch (err) {
     console.error('❌ Error generating player map:', err);
     res.status(500).json({ error: 'Failed to generate map view' });

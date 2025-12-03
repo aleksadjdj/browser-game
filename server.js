@@ -44,10 +44,10 @@ app.get("/", (req, res) => {
 
 // ✅ Start server
 app.listen(PORT, () => {
-  console.log(`✅ Server running at http://localhost:${PORT}`);
+  console.log(`🧩 Editor available at: http://localhost:${PORT}/editor`);
   console.log(`🎮 Player 1 available at http://localhost:${PORT}/?id=player_uuid_1`);
   console.log(`🎮 Player 2 available at http://localhost:${PORT}/?id=player_uuid_2`);
   console.log(`🎮 Player 3 available at http://localhost:${PORT}/?id=player_uuid_3`);
   console.log(`🎮 Game available at (player 1) http://localhost:${PORT}`);
-  console.log(`🧩 Editor available at: http://localhost:${PORT}/editor`);
+  console.log(`✅ Server running at http://localhost:${PORT}`);
 });

@@ -146,12 +146,12 @@ export async function movePlayerService(id, x, y) {
   if (!tileData) return { success: false, message: "No tile at target position" };
 
   // ✅ Match with tile definition from tileset
+  
   const tileType = tileset.tiles.find(t => t.slug === tileData.tileSlug);
   if (!tileType) return { success: false, message: "Tile type not found in tileset" };
-
   // ✅ Check if walkable
   if (!tileType.walkable) {
-    return { success: false, message: `Cannot walk on ${tileType.name}` };
+    return { success: false, message: `Cannot walk on ${tileType.displayName}` };
   }
 
   // ✅ Move player
